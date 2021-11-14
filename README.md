@@ -10,7 +10,6 @@ This section describes in detail the methodology and analysis operations require
 		* [List datasets](#list-datasets)
 		* [About the data](#labout-the-data)
 		* [Downloads](#downloads)
-		* [Limitations](#limitations)
 	* [GPM IMERG](#gpm-imerg)
 		* [List datasets](#list-datasets)
 		* [About the data](#labout-the-data)
@@ -27,7 +26,7 @@ This section describes in detail the methodology and analysis operations require
 
 ## Climate Data
 
-The climate are varies by location and by time of year. Daily and monthly rainfall, monthly temperature and potential evapotranspiration are a few of the many datasets from various data providers found under our climate data section.
+The climate are varies by location and by time of year. Daily and monthly rainfall, monthly temperature and potential evapotranspiration are a few of the many datasets from various data providers found below.
 
 
 ### TerraClimate
@@ -42,20 +41,20 @@ The climate are varies by location and by time of year. Daily and monthly rainfa
 
 | Name  | Description  | Units |
 |---|---|---|
-| `aet`  | Actual Evapotranspiration, monthly total  | mm |
-| `def`  | Climate Water Deficit, monthly total  | mm |
-| `pet`  | Potential evapotranspiration, monthly total  | mm |
-| `ppt`  | Precipitation, monthly total  | mm |
-| `q`  | Runoff, monthly total  | mm |
-| `soil`  | Soil Moisture, total column - at end of month  | mm |
-| `srad`  | Downward surface shortwave radiation  | W/m2 |
-| `swe`  | Snow water equivalent - at end of month  | mm |
-| `tmax`  | Max Temperature, average for month  | C |
-| `tmin`  | Min Temperature, average for month  | C |
-| `vap`  | Vapor pressure, average for month  | kPa |
-| `ws`  | Wind speed, average for month  | m/s |
-| `vpd`  | Vapor Pressure Deficit, average for month  | kpa |
-| `PDSI`  | Palmer Drought Severity Index, at end of month  | unitless |
+| `aet`  | Actual Evapotranspiration, monthly total  | `mm` |
+| `def`  | Climate Water Deficit, monthly total  | `mm` |
+| `pet`  | Potential evapotranspiration, monthly total  | `mm` |
+| `ppt`  | Precipitation, monthly total  | `mm` |
+| `q`  | Runoff, monthly total  | `mm` |
+| `soil`  | Soil Moisture, total column - at end of month  | `mm` |
+| `srad`  | Downward surface shortwave radiation  | `W/m2` |
+| `swe`  | Snow water equivalent - at end of month  | `mm` |
+| `tmax`  | Max Temperature, average for month  | `°C` |
+| `tmin`  | Min Temperature, average for month  | `°C` |
+| `vap`  | Vapor pressure, average for month  | `kPa` |
+| `ws`  | Wind speed, average for month  | `m/s` |
+| `vpd`  | Vapor Pressure Deficit, average for month  | `kpa` |
+| `PDSI`  | Palmer Drought Severity Index, at end of month  | `unitless` |
 
 #### About the data
 
@@ -74,13 +73,6 @@ The climate are varies by location and by time of year. Daily and monthly rainfa
 Individual years download link: [http://thredds.northwestknowledge.net:8080/thredds/catalog/TERRACLIMATE_ALL/data/catalog.html](http://thredds.northwestknowledge.net:8080/thredds/catalog/TERRACLIMATE_ALL/data/catalog.html)
 
 Also available at JNB Server Public Directory: J:\Data\GLOBAL\CLIMATE\TerraClimate
-
-#### Limitations
-
-1. Long-term trends in data such as temperature and precipitation are inherited from parent datasets. TerraClimate should not be used directly for independent assessments of trends relative to these parent datasets.
-2. TerraClimate will not capture temporal variability at finer scales than their parent datasets and thus is not able to capture variability in orographic precipitation ratios and inversions.
-3. The water balance model is simple and uses a static reference landcover – hence does not account for heterogeneity in vegetation types.
-4. Limited validation in data-sparse regions (e.g., Antarctica);
 
 
 ### GPM IMERG
@@ -136,9 +128,9 @@ A climate index is here defined as a calculated value that can be used to descri
 
 The following climate indexes are for the precipitation and temperature amount:
 
-### Standardized Precipitation Evapotranspiration Index (SPEI)
+### Standardized Precipitation-Evapotranspiration Index (SPEI)
 
-The [SPEI](https://spei.csic.es) is an extension of the widely used Standardized Precipitation Index ([SPI](https://library.wmo.int/doc_num.php?explnum_id=7768)). The SPEI is designed to take into account both precipitation and potential evapotranspiration (PET) in determining drought. Thus, unlike the SPI, the SPEI captures the main impact of increased temperatures on water demand.
+The [SPEI](https://spei.csic.es) is an extension of the widely used Standardized Precipitation Index ([SPI](https://library.wmo.int/doc_num.php?explnum_id=7768)). The SPEI is designed to take into account both `precipitation` and `potential evapotranspiration` (PET) in determining drought. Thus, unlike the SPI, the SPEI captures the main impact of increased temperatures on water demand.
 
 The SPEI can measure drought severity according to its intensity and duration, and can identify the onset and end of drought episodes. The SPEI allows comparison of drought severity through time and space, since it can be calculated over a wide range of climates, as can the SPI. 
 
