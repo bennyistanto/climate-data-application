@@ -16,10 +16,10 @@ This section describes in detail the methodology and analysis operations require
 		* [About the data](#labout-the-data)
 		* [Downloads](#downloads)
 * [Climate Indices](#climate-indices)
-	* [The Standardized Precipitation-Evapotranspiration Index (SPEI)](#the-standardized-precipitation-evapotranspiration-index-spei)
+	* [Standardized Precipitation-Evapotranspiration Index (SPEI)](#standardized-precipitation-evapotranspiration-index-spei)
 		* [About the data](#labout-the-data)
 		* [Symbology](#symbology)
-	* [Consecutive Dry Days](#consecutive-dry-days)
+	* [Consecutive Dry Days (CDD)](#consecutive-dry-days-cdd)
 		* [How it works](#lhow-it-works)
 		* [About the data](#labout-the-data)
 		* [Symbology](#symbology)
@@ -136,7 +136,7 @@ A climate index is here defined as a calculated value that can be used to descri
 
 The following climate indexes are for the precipitation and temperature amount:
 
-### The Standardized Precipitation Evapotranspiration Index (SPEI)
+### Standardized Precipitation Evapotranspiration Index (SPEI)
 
 The [SPEI](https://spei.csic.es) is an extension of the widely used Standardized Precipitation Index ([SPI](https://library.wmo.int/doc_num.php?explnum_id=7768)). The SPEI is designed to take into account both precipitation and potential evapotranspiration (PET) in determining drought. Thus, unlike the SPI, the SPEI captures the main impact of increased temperatures on water demand.
 
@@ -144,7 +144,9 @@ The SPEI can measure drought severity according to its intensity and duration, a
 
 The idea behind the SPEI is to compare the highest possible evapotranspiration (what we call the evaporative demand by the atmosphere) with the current water availability. Thus, precipitation (accumulated over a period of time) in the SPEI stands for the water availability, while ETo stands for the atmospheric water demand. 
 
-Negative SPI values represent rainfall deficit and less than median precipitation, and high potential epotranspiration (Dry), starts when the SPEI value is equal or below -1.0. Whereas positive SPEI values indicate rainfall surplus and greater than median precipitation, and low potential epotranspiration (Wet), starts when the SPI value is equal or above 1.0, and ends when the value becomes negative.
+Negative SPI values represent rainfall deficit and less than median precipitation, and high potential epotranspiration (Dry), starts when the SPEI value is equal or below -1.0. Whereas positive SPEI values indicate rainfall surplus and greater than median precipitation, and low potential epotranspiration (Wet), starts when the SPEI value is equal or above 1.0, and ends when the value becomes negative.
+
+SPEI derived from TerraClimate data
 
 #### About the data
 
@@ -177,7 +179,7 @@ The threshold and the symbology for the SPEI can follow below color codes and im
 | Exceptionally Moist  | +2.00 and above  | `#a21fec` ![#a21fec](https://via.placeholder.com/15/a21fec/000000?text=+)  | rgb(162, 31, 236)  |
 
 
-### Consecutive Dry Days
+### Consecutive Dry Days (CDD)
 
 The number of consecutive dry days (CDD) is the largest number of consecutive days with daily precipitation amount less than 1 mm (or depending on the rain days criteria of the country), within a certain time. Usually the process counts the number of days in the past 90 days to measure the drought level.
 
