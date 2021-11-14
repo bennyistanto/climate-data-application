@@ -1,2 +1,2 @@
-# terraclimate-data-application
+# climate-data-application
  
