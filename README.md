@@ -15,7 +15,7 @@ This section describes in detail the methodology and analysis operations require
 		* [List datasets](#list-datasets)
 		* [About the data](#labout-the-data)
 		* [Downloads](#downloads)
-* Climate Indices	
+* [Climate Indices](#climate-indices)
 	* [The Standardized Precipitation-Evapotranspiration Index (SPEI)](#the-standardized-precipitation-evapotranspiration-index-spei)
 		* [About the data](#labout-the-data)
 		* [Symbology](#symbology)
@@ -146,8 +146,6 @@ The idea behind the SPEI is to compare the highest possible evapotranspiration (
 
 Negative SPI values represent rainfall deficit and less than median precipitation, and high potential epotranspiration (Dry), starts when the SPEI value is equal or below -1.0. Whereas positive SPEI values indicate rainfall surplus and greater than median precipitation, and low potential epotranspiration (Wet), starts when the SPI value is equal or above 1.0, and ends when the value becomes negative.
 
-Python packages [climate-indices](https://pypi.org/project/climate-indices/) developed by [U.S. Drought Portal](https://www.drought.gov/drought/python-climate-indices) used to calculate the index.
-
 #### About the data
 
 | Characteristic  | Description  |
@@ -187,7 +185,7 @@ The number of consecutive dry days (CDD) is the largest number of consecutive da
 
 Calculate the number of rain days based on the threshold and calculate the count of the most recent days since a rain day or the most recent consecutive string of days that meet the threshold criteria is summed.
 
-Threshold criteria: 1, 2.5, 5, 10 and 20 milimeters of rainfall
+Option for rain day's threshold: 1, 2.5, 5, 10 or 20 milimeters of rainfall per day
 
 ```
 IF previousCDD == null THEN previousCDD == 0
