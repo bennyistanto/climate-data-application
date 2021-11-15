@@ -78,8 +78,6 @@ If you are new to using Bash refer to the following lessons with Software Carpen
 
 - Download and install [Anaconda Python](https://www.anaconda.com/products/individual) on your machine for [macOS](https://repo.anaconda.com/archive/Anaconda3-2020.11-MacOSX-x86_64.pkg) or [Linux](https://repo.anaconda.com/archive/Anaconda3-2020.11-Linux-x86_64.sh).
 
-	Follow Installing Anaconda on [macOS](https://docs.anaconda.com/anaconda/install/mac-os/) guideline and for [Linux](https://docs.anaconda.com/anaconda/install/linux/)
-
 
 ### 1.2. Windows
 
@@ -379,15 +377,17 @@ As explain in Step 3.1. Input requirement above, we need to check the variable a
 - As you can see from above picture, all the requirement is completed: unit is in `mm`, order dimension for each variables is `lat`, `lon`, `time`, and `time` dimension is in `UNLIMITED`. Once this has completed, the dataset can be used as input to `climate-indices` package for computing SPEI. 
 
 
-# 4. Calculate SPI
+## 4. Calculate SPI
 
-Let's start the calculation! And please make sure below points:
+Please make sure below points:
 
 - [x] You are still inside `climate_indices` environment to start working on SPEI calculation. 
 - [x] Variable name on precipitation `--var_name_precip`, usually TerraClimate data use `ppt` as name while other precipitation data like CHIRPS using `precip` and IMERG using `precipitation` as a variable name. To make sure, check using command `ncdump -h file.nc` then adjust it in SPEI script if needed.
 - [x] Variable name on potential evapotranspiration `--var_name_pet`, usually TerraClimate data use `pet` as name.
 - [x] Precipitation and potential evapotranspiration unit must be written as `millimeters`, `milimeter`, `mm`, `inches`, `inch` or `in`.
 - [x] Data dimension and order must be written as `lat`, `lon`, `time` (Windows machine required this order) or `time`, `lat`, `lon` (Works tested on Mac/Linux and Linux running on WSL).
+
+Let's start the calculation!
 
 - In your Terminal, run the following code.
 
@@ -397,38 +397,98 @@ Let's start the calculation! And please make sure below points:
 
 - Above code is example for calculating SPEI 1 to 72-months. It's ok if you think you only need some of them. Example: you are interested to calculate SPEI 1 - 3-months or SPEI 12-months, then adjust above code into `--scales 1 2 3` or `--scales 12`.
 
-![IMERG SPI](./img/imerg-spi.png)
+- The above command will compute SPEI (both gamma and Pearson Type III distributions) from monthly precipitation dataset and potential evapotranspiration, and the calibration period used will be Jan-1958 through Dec-2020. The index will be computed at `1`,`2`,`3`,`6`,`9`,`12`,`18`,`24`,`36`,`48`,`60` and `72-month` timescales. The output files will be <`out_dir>/stp_cli_spei_gamma_xx.nc`, and `<out_dir>/stp_cli_spei_pearson_xx.nc`.
 
-The above command will compute SPI (standardized precipitation index, both gamma and Pearson Type III distributions) from an input precipitation dataset (in this case, IMERG precipitation dataset). The input dataset is monthly rainfall accumulation data and the calibration period used will be Jun-2000 through Dec-2020. The index will be computed at `1`,`2`,`3`,`6`,`9`,`12`,`24`,`36`,`48`,`60` and `72-month` timescales. The output files will be <`out_dir>/java_IMERG_spi_gamma_xx.nc`, and `<out_dir>/java_IMERG_spi_pearson_xx.nc`.
+	The output files will be:
 
-The output files will be:
+	Gamma
 
-Gamma
+	1. 1-month: `/outputs/nc_original/stp_cli_spei_gamma_01.nc`</br>
+	2. 2-month: `/outputs/nc_original/stp_cli_spei_gamma_02.nc`</br>
+	3. 3-month: `/outputs/nc_original/stp_cli_spei_gamma_03.nc`</br>
+	4. 6-month: `/outputs/nc_original/stp_cli_spei_gamma_06.nc`</br>
+	5. 9-month: `/outputs/nc_original/stp_cli_spei_gamma_09.nc`</br>
+	6. 12-month: `/outputs/nc_original/stp_cli_spei_gamma_12.nc`</br>
+	7. 18-month: `/outputs/nc_original/stp_cli_spei_gamma_18.nc`</br>
+	8. 24-month: `/outputs/nc_original/stp_cli_spei_gamma_24.nc`</br>
+	9. 36-month: `/outputs/nc_original/stp_cli_spei_gamma_36.nc`</br>
+	10. 48-month: `/outputs/nc_original/stp_cli_spei_gamma_48.nc`</br>
+	11. 60-month: `/outputs/nc_original/stp_cli_spei_gamma_60.nc`</br>
+	12. 72-month: `/outputs/nc_original/stp_cli_spei_gamma_72.nc`</br>
 
-1. 1-month: `/Output_nc/java_IMERG_spi_gamma_01.nc`</br>
-2. 2-month: `/Output_nc/java_IMERG_spi_gamma_02.nc`</br>
-3. 3-month: `/Output_nc/java_IMERG_spi_gamma_03.nc`</br>
-4. 6-month: `/Output_nc/java_IMERG_spi_gamma_06.nc`</br>
-5. 9-month: `/Output_nc/java_IMERG_spi_gamma_09.nc`</br>
-6. 12-month: `/Output_nc/java_IMERG_spi_gamma_12.nc`</br>
-7. 24-month: `/Output_nc/java_IMERG_spi_gamma_24.nc`</br>
-8. 36-month: `/Output_nc/java_IMERG_spi_gamma_36.nc`</br>
-9. 48-month: `/Output_nc/java_IMERG_spi_gamma_48.nc`</br>
-10. 60-month: `/Output_nc/java_IMERG_spi_gamma_60.nc`</br>
-11. 72-month: `/Output_nc/java_IMERG_spi_gamma_72.nc`</br>
+	Pearson
 
-Pearson
-
-1. 1-month: `/Output_nc/java_IMERG_spi_pearson_01.nc`</br>
-2. 2-month: `/Output_nc/java_IMERG_spi_pearson_02.nc`</br>
-3. 3-month: `/Output_nc/java_IMERG_spi_pearson_03.nc`</br>
-4. 6-month: `/Output_nc/java_IMERG_spi_pearson_06.nc`</br>
-5. 9-month: `/Output_nc/java_IMERG_spi_pearson_09.nc`</br>
-6. 12-month: `/Output_nc/java_IMERG_spi_pearson_12.nc`</br>
-7. 24-month: `/Output_nc/java_IMERG_spi_pearson_24.nc`</br>
-8. 36-month: `/Output_nc/java_IMERG_spi_pearson_36.nc`</br>
-9. 48-month: `/Output_nc/java_IMERG_spi_pearson_48.nc`</br>
-10. 60-month: `/Output_nc/java_IMERG_spi_pearson_60.nc`</br>
-11. 72-month: `/Output_nc/java_IMERG_spi_pearson_72.nc`</br>
+	1. 1-month: `/outputs/nc_original/stp_cli_spei_pearson_01.nc`</br>
+	2. 2-month: `/outputs/nc_original/stp_cli_spei_pearson_02.nc`</br>
+	3. 3-month: `/outputs/nc_original/stp_cli_spei_pearson_03.nc`</br>
+	4. 6-month: `/outputs/nc_original/stp_cli_spei_pearson_06.nc`</br>
+	5. 9-month: `/outputs/nc_original/stp_cli_spei_pearson_09.nc`</br>
+	6. 12-month: `/outputs/nc_original/stp_cli_spei_pearson_12.nc`</br>
+	7. 18-month: `/outputs/nc_original/stp_cli_spei_pearson_18.nc`</br>
+	8. 24-month: `/outputs/nc_original/stp_cli_spei_pearson_24.nc`</br>
+	9. 36-month: `/outputs/nc_original/stp_cli_spei_pearson_36.nc`</br>
+	10. 48-month: `/outputs/nc_original/stp_cli_spei_pearson_48.nc`</br>
+	11. 60-month: `/outputs/nc_original/stp_cli_spei_pearson_60.nc`</br>
+	12. 72-month: `/outputs/nc_original/stp_cli_spei_pearson_72.nc`</br>
 
 Parallelization will occur utilizing all CPUs.
+
+When the SPEI calculation completed, move arrange all the output by moving SPEI files with gamma to `gamma`folder and with pearson to `perason` folder.
+
+
+## 5. Visualize the result using Panoply
+
+Let see the result.
+
+- From the `/outputs/nc_original/gamma` directory, right-click file `stp_cli_spei_gamma_12.nc` and Open With Panoply.
+
+	If you are not following the tutorial but interested to see the file, you can download this file from this link: []() 
+
+- From the Datasets tab select `spei_gamma_12_month` and click Create Plot
+
+- In the Create Plot window select option Georeferenced Longitude-Latitude.
+
+- When the Plot window opens:
+
+	- Array tab: Change the time into `717` to view data on `1 September 2019`
+	- Scale tab: Change value on Min `-3.09`, Max `3.09`, Major `6`, Color Table `CB_RdBu_09.cpt`
+	- Map tab: Change value on Center on Lon `7.0` Lat `1.0`, then Zoom in the map through menu-editor Plot > Zoom - Plot In few times until Sao Tome and Principe appear proportionally. Set grid spacing `1.0` and Labels on every grid lines.
+	- Overlays tab: Change `Overlay 1` to `MWDB_Coasts_Countries_1.cnob`
+
+	![SPEI-12](./img/spei-12.png)
+
+
+## 6. Convert the result to GeoTIFF
+
+We need CDO to do a conversion of the result into GeoTIFF format, and CDO required the variable should be in `time`,`lat`,`lon`, while the output from SPEI: `stp_cli_spei_gamma_x_month.nc` in `lat`,`lon`,`time`, you can check this via `ncdump -h stp_cli_spei_gamma_12.nc`
+
+- Navigate your Terminal to folder `/outputs/nc_original/gamma/`
+
+- Let's re-order the variables into `time`,`lat`,`lon` using `ncpdq` command from NCO and save the result to folder `/outputs/nc_tll/STP/`
+
+	``` bash
+	ncpdq -a time,lat,lon stp_cli_spei_gamma_12.nc ../../../outputs/nc_tll/STP/tp_cli_spei_gamma_12.nc
+	```
+
+- Navigate your Terminal to folder `/outputs/nc_tll/STP/`
+
+- Check result and metadata to make sure everything is correct.
+
+	``` bash
+	ncdump -h stp_cli_spei_gamma_12.nc
+	```
+
+- Then convert all `stp_cli_spei_gamma_12.nc` value into GeoTIFF with `time` dimension information as the filename using CDO and GDAL.
+
+- Execute below script and save the result to folder `Output_TIF`
+
+	``` bash
+	for t in `cdo showdate stp_cli_spei_gamma_12.nc`; do
+	    cdo seldate,$t stp_cli_spei_gamma_12.nc dummy.nc     
+	    gdal_translate -of GTiff -a_ullr 5.75 2.15 8.05 -0.35 -a_srs EPSG:4326 -co COMPRESS=LZW -co PREDICTOR=1 dummy.nc ../../geotiff/gamma/STP/SPEI-12/stp_cli_terraclimate_spei12.$t.tif
+	done
+	```
+
+- Next, you can continue to translate other SPEI files.
+
+Congrats, now you are able to calculate SPEI based on monthly rainfall in netCDF.
