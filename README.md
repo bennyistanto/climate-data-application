@@ -219,7 +219,7 @@ The threshold and the symbology for the CDD can follow below color codes and ima
 
 You will find step-by-step guideline to calculate climate indices, and can try different (data source and format) approach below.
 
-1. SPEI using TerraClimate data
+1. [SPEI using TerraClimate data](https://github.com/bennyistanto/climate-data-application/blob/main/SPEI_using_TerraClimate_data.md)
 2. Drought analysis using SPEI
 3. CDD using IMERG data
 4. Drought analysis using CDD

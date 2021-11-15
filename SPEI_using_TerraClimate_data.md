@@ -41,7 +41,7 @@ Feel free to use your own preferences for this setting/folder arrangements.
 If you encounter a problem, please look for a online solution. The installation and configuration described below is mostly performed using a bash shell on macOS. Windows users will need to install and configure a bash shell in order to follow the usage shown below. Try to use [Windows Subsystem for Linux](#enable-the-windows-subsytem-for-linux) for this purpose.
 
 
-### macOS/Linux
+### 1.1. macOS/Linux
 
 #### Installing software for macOS/Linux
 
@@ -49,24 +49,24 @@ If you are new to using Bash refer to the following lessons with Software Carpen
 
 - If you don't have [**Homebrew**](https://brew.sh), you can install it by pasting below code in your macOS/Linux terminal.
 
-```bash
-/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
-```
+	```bash
+	/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+	```
 
 - Install `wget` (for downloading data). Use Hombrew to install it by pasting below code in your macOS terminal.
 
-```bash
-brew install wget
-```
+	```bash
+	brew install wget
+	```
 
 - Download and install [Panoply Data Viewer](https://www.giss.nasa.gov/tools/panoply/) from [NASA GISS](https://www.giss.nasa.gov/tools/panoply/download/) on your machine for [macOS](https://www.giss.nasa.gov/tools/panoply/download/PanoplyMacOS-4.12.2.dmg) or [Linux](https://www.giss.nasa.gov/tools/panoply/download/PanoplyJ-4.12.2.zip).
 
 - Download and install [Anaconda Python](https://www.anaconda.com/products/individual) on your machine for [macOS](https://repo.anaconda.com/archive/Anaconda3-2020.11-MacOSX-x86_64.pkg) or [Linux](https://repo.anaconda.com/archive/Anaconda3-2020.11-Linux-x86_64.sh).
 
-	- Follow Installing Anaconda on [macOS](https://docs.anaconda.com/anaconda/install/mac-os/) guideline and for [Linux](https://docs.anaconda.com/anaconda/install/linux/)
+	Follow Installing Anaconda on [macOS](https://docs.anaconda.com/anaconda/install/mac-os/) guideline and for [Linux](https://docs.anaconda.com/anaconda/install/linux/)
 
 
-### Windows
+### 1.2. Windows
 
 #### Enable the Windows Subsytem for Linux
 
@@ -86,15 +86,15 @@ If you are new to using Bash refer to the following lessons with Software Carpen
 
 - If you don't have [**Homebrew**](https://brew.sh), you can install it by pasting below code in your WSL Ubuntu terminal.
 
-```bash
-bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"
-```
+	```bash
+	bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"
+	```
 
 - Install `wget` (for downloading data). Use Hombrew to install it by pasting below code in your WSL Ubuntu  terminal.
 
-```bash
-brew install wget
-```
+	```bash
+	brew install wget
+	```
 
 - Download and install [Panoply Data Viewer](https://www.giss.nasa.gov/tools/panoply/) from [NASA GISS](https://www.giss.nasa.gov/tools/panoply/download/) on your machine: [Windows](https://www.giss.nasa.gov/tools/panoply/download/PanoplyWin-4.12.2.zip).
 
@@ -108,23 +108,23 @@ Reference: [https://gist.github.com/kauffmanes/5e74916617f9993bc3479f401dfec7da]
 - Select the release you want. I have a 64-bit computer, so I chose the latest release ending in `x86_64.sh`. If I had a 32-bit computer, I'd select the `x86.sh` version. If you accidentally try to install the wrong one, you'll get a warning in the terminal. I chose `Anaconda3-2020.11-Linux-x86_64.sh`.
 - From the terminal run `wget https://repo.anaconda.com/archive/[YOUR VERSION]`. Example: 
 
-```bash
-wget https://repo.anaconda.com/archive/Anaconda3-2020.11-Linux-x86_64.sh
-```
+	```bash
+	wget https://repo.anaconda.com/archive/Anaconda3-2020.11-Linux-x86_64.sh
+	```
 
 - After download process completed, Run the installation script: `bash Anaconda[YOUR VERSION].sh` 
 
-```bash
-bash Anaconda3-2020.11-Linux-x86_64.sh
-```
+	```bash
+	bash Anaconda3-2020.11-Linux-x86_64.sh
+	```
 
 - Read the license agreement and follow the prompts to press Return/Enter to accept. Later will follow with question on accept the license terms, type `yes` and Enter. When asks you if you'd like the installer to prepend it to the path, press Return/Enter to confirm the location. Last question will be about initialize Anaconda3, type `yes` then Enter.
 - Close the terminal and reopen it to reload .bash configs. It will automatically activate `base` environment.
 - Deactivate `base` environment then set to `false` the confirguration of auto activate the `base` environment by typing
 
-```bash
-conda deactivate && conda config --set auto_activate_base false
-```
+	```bash
+	conda deactivate && conda config --set auto_activate_base false
+	```
 
 - To test that it worked, `which python` in your Terminal. It should print a path that has anaconda in it. Mine is `/home/bennyistanto/anaconda3/bin/python`. If it doesn't have anaconda in the path, do the next step.
 - Manually add the Anaconda bin folder to your PATH. To do this, I added `"export PATH=/home/bennyistanto/anaconda3/bin:$PATH"` to the bottom of my `~/.bashrc` file.
@@ -141,29 +141,29 @@ This step must **only be done the first time**. Once the environment has been cr
 
 - First, open your Terminal (in your macOS/Linux and Ubuntu Linux on WSL), create the Python environment with `python3.7` as default:
 
-```bash
-conda create -n climate_indices python=3.7
-```
+	```bash
+	conda create -n climate_indices python=3.7
+	```
 
-Proceed with `y`
+	Proceed with `y`
 
 - The environment created can now be ‘activated’:
 
-```bash
-conda activate climate_indices
-```
+	```bash
+	conda activate climate_indices
+	```
 
 - Install netCDF Operator ([NCO](http://nco.sourceforge.net/)), Climate Data Operator ([CDO](https://code.mpimet.mpg.de/projects/cdo)) from Max-Planck-Institut für Meteorologie and Geospatial Data Abstraction Library ([GDAL/OGR](https://gdal.org)) using `conda` and proceed with `y`.
 
-```bash
-conda install -c conda-forge nco cdo gdal
-```
+	```bash
+	conda install -c conda-forge nco cdo gdal
+	```
 
 - Install [climate-indices](https://pypi.org/project/climate-indices/) package. Once the environment has been activated then subsequent Python commands will run in this environment where the package dependencies for this project are present. Now the package can be added to the environment along with all required modules (dependencies) via [pip](https://pip.pypa.io/en/stable/):
 
-```bash
-pip install climate-indices
-```
+	```bash
+	pip install climate-indices
+	```
 
 ## 3. Preparing input
 
@@ -172,64 +172,187 @@ SPEI requires monthly precipitation and potential evapotranspiration data, for b
 If you are prefer to use your own dataset also fine, you can still follow this guideline and adjust some steps and code related to filename, unit, format and structure.
 
 
-### Input specification
+### 3.1. Input specification
 
 The [climate-indices](https://pypi.org/project/climate-indices/) python package enables the user to calculate SPEI using any gridded netCDF dataset. However, there are certain specifications for input files that vary based on input type.
 
-- Precipitation unit must be written as `millimeters`, `milimeter`, `mm`, `inches`, `inch` or `in`.
+- Precipitation and potential evapotranspiration unit must be written as `millimeters`, `milimeter`, `mm`, `inches`, `inch` or `in`.
 
 - Data dimension and order must be written as `lat`, `lon`, `time` (Windows machine required this order) or `time`, `lat`, `lon` (Works tested on Mac/Linux and Linux running on WSL). 
 
-- For this exercise, all the data will prepare following this dimension order: `lat`, `lon`, `time` as all the data will force following this order during SPEI calculation by NCO module.
+- If your study area are big, it's better to prepare all the data following this dimension order: `lat`, `lon`, `time` as all the data will force following this order during SPEI calculation by NCO module. Let say you only prepare the data as is (leaving the order to `lat`, `lon`, `time`), it also acceptable but it will required lot of memory to use re-ordering the dimension, and usually NCO couldn't handle all the process and failed.
 
-### Download TerraClimate data
+### 3.2. Download TerraClimate data
 
 - There are 2 files contains link for downloading `ppt` ([https://github.com/bennyistanto/climate-data-application/blob/main/downloads/ppt/nc_original/data_ppt.sh](https://github.com/bennyistanto/climate-data-application/blob/main/downloads/ppt/nc_original/data_ppt.sh) and `pet` ([https://github.com/bennyistanto/climate-data-application/blob/main/downloads/pet/nc_original/data_pet.sh](https://github.com/bennyistanto/climate-data-application/blob/main/downloads/pet/nc_original/data_pet.sh)), the folder location are exactly the same with the working directory above. 
+
 - Download both files and put it in the same location with your working directory.
+
 - Navigate to `Downloads/TerraClimate/ppt/nc_original` and `Downloads/TerraClimate/pet/nc_original`folder in the working directory. Download using `wget` all TerraClimate in netCDF format from Jan 1958 to Dec 2020 (this is lot of data, `ppt` +- 7.7GB and `pet` +- 6.4GB, please make sure you have bandwidth and unlimited data package). Paste and Enter below script in your Terminal.
 
-If you are in `Downloads/TerraClimate/ppt/nc_original` then execute below command
+	If you are in `downloads/TerraClimate/ppt/nc_original` then execute below command
 
-```bash
-sh data_ppt.sh
-```
-If you are in `Downloads/TerraClimate/pet/nc_original` then execute below command
+	```bash
+	sh data_ppt.sh
+	```
+	If you are in `downloads/TerraClimate/pet/nc_original` then execute below command
 
-```bash
-sh data_pet.sh
-```
+	```bash
+	sh data_pet.sh
+	```
 
-### Merge netCDFs into single netCDF
+---
+**NOTE:**
 
-Merge all netcdf in a folder into single netcdf
+You can choose Step 3.3. A or B below, both will generate the same output at the end.
 
-```
-cdo mergetime TerraClimate_*.nc TerraClimate_ppt_1958_2020.nc
-```
+This guideline provide example on how to use CDO and NCO to do some data extraction process, you can choose which one is suits you.
 
-### Clip data using a bounding box based on area of interest
+---
 
-I am providing example on how to use CDO and NCO to do some data extraction process, you can choose which one is suits you. In my opinion, NCO is faster than CDO, and NCO produce smaller size of output.
+### 3.3.A. Merge netCDFs into single netCDF and Clip data using a bounding box based on area of interest
 
-- Crop your area of interest using bounding box. We will use Sao Tome and Principe (STP) as the example case.
+- Merge all annual netcdf in a folder into single netcdf.
+
+	Precipitation: make sure you are in `/downloads/ppt/nc_original`
+
+	CDO script:
+
+	```bash
+	cdo mergetime TerraClimate_*.nc ../nc_merge/TerraClimate_ppt_1958_2020.nc
+	```
+
+	NCO script:
+
+	```bash
+	ncrcat -O -h TerraClimate_*.nc ../nc_merge/TerraClimate_ppt_1958_2020.nc
+	```
+
+	Potential Evapotranspiration: make sure you are in `/downloads/pet/nc_original`
+
+	CDO script:
+
+	```bash
+	cdo mergetime TerraClimate_*.nc ../nc_merge/TerraClimate_pet_1958_2020.nc
+	```
+
+	NCO script:
+
+	```bash
+	ncrcat -O -h TerraClimate_*.nc ../nc_merge/TerraClimate_pet_1958_2020.nc
+	```
+
+- Clip your area of interest using bounding box. We will use Sao Tome and Principe (STP) as the country case.
+	
+	Example: STP bounding box with format `lon1`,`lon2`,`lat1`,`lat2` is `5.75`,`8.05`,`-0.35`,`2.15`
+
+	Precipitation: Navigate your location to `/downloads/ppt/nc_merge`
+
+	CDO script:
+
+	``` bash
+	cdo sellonlatbox,5.75,8.05,-0.35,2.15 TerraClimate_ppt_1958_2020.nc ../nc_subset/stp_cli_terraclimate_ppt_1958_2020.nc
+	```
+
+	NCO script:
+
+	``` bash
+	ncks -d latitude,-0.35,2.15 -d longitude,5.75,8.05 TerraClimate_ppt_1958_2020.nc -O ../nc_subset/stp_cli_terraclimate_ppt_1958_2020.nc
+	```
+
+	Potential Evapotranspiration: Navigate your location to `/downloads/pet/nc_merge`
+
+	CDO script:
+
+	``` bash
+	cdo sellonlatbox,5.75,8.05,-0.35,2.15 TerraClimate_pet_1958_2020.nc ../nc_subset/stp_cli_terraclimate_pet_1958_2020.nc
+	```
+
+	NCO script:
+
+	``` bash
+	ncks -d latitude,-0.35,2.15 -d longitude,5.75,8.05 TerraClimate_ppt_1958_2020.nc -O ../nc_subset/stp_cli_terraclimate_ppt_1958_2020.nc
+	```
+
+### 3.3.B. Clip data using a bounding box based on area of interest and Merge netCDFs into single netCDF
+
+- Clip your area of interest using bounding box. We will use Sao Tome and Principe (STP) as the example case.
+	
 	Example: (STP) bounding box with format `lon1`,`lon2`,`lat1`,`lat2` is `5.75`,`8.05`,`-0.35`,`2.15`
 
-Paste and Enter below code in your Terminal.
+	Precipitation: Navigate your location to `/downloads/ppt/nc_original`
 
-CDO script:
+	CDO script:
 
-``` bash
-cdo sellonlatbox,5.75,8.05,-0.35,2.15 TerraClimate_ppt_1958_2020.nc stp_cli_terraclimate_ppt_1958_2020.nc
-```
+	``` bash
+	for fl in *.nc; cdo sellonlatbox,5.75,8.05,-0.35,2.15 $fl ../nc_subset/"stp_cli_"$fl; done
+	```
 
-NCO script:
+	NCO script:
 
-``` bash
-ncks -d latitude,-0.35,2.15 -d longitude,5.75,8.05 TerraClimate_ppt_1958_2020.nc -O ../nc_subset/stp_cli_terraclimate_ppt_1958_2020.nc
-```
+	``` bash
+	for fl in *.nc; ncks -d latitude,-0.35,2.15 -d longitude,5.75,8.05 $fl -O ../nc_subset/"stp_cli_"$fl; done
+	```
 
-- Let's read header contents of above result. Type and execute below code:
+	Potential Evapotranspiration: Navigate your location to `/downloads/pet/nc_original`
 
-``` bash
-ncdump -h stp_cli_terraclimate_ppt_1958_2020.nc
-```
+	CDO script:
+
+	``` bash
+	for fl in *.nc; cdo sellonlatbox,5.75,8.05,-0.35,2.15 $fl ../nc_subset/"stp_cli_"$fl; done
+	```
+
+	NCO script:
+
+	``` bash
+	for fl in *.nc; ncks -d latitude,-0.35,2.15 -d longitude,5.75,8.05 $fl -O ../nc_subset/"stp_cli_"$fl; done
+	```
+
+- Merge all annual netcdf in a folder into single netcdf.
+
+	Precipitation: make sure you are in `/downloads/ppt/nc_subset`
+
+	CDO script:
+
+	```bash
+	cdo mergetime stp_*.nc ../nc_merge/stp_cli_terraclimate_ppt_1958_2020.nc
+	```
+
+	NCO script:
+
+	```bash
+	ncrcat -O -h stp_*.nc ../nc_merge/stp_cli_terraclimate_ppt_1958_2020.nc
+	```
+
+	Potential Evapotranspiration: make sure you are in `/downloads/pet/nc_subset`
+
+	CDO script:
+
+	```bash
+	cdo mergetime stp_*.nc ../nc_merge/stp_cli_terraclimate_pet_1958_2020.nc
+	```
+
+	NCO script:
+
+	```bash
+	ncrcat -O -h stp_*.nc ../nc_merge/stp_cli_terraclimate_pet_1958_2020.nc
+	```
+
+### Check variable and attribute
+As explain in Step 3.1. Input specification above, we need to check the variable and attribute on above result to make sure all meet the requirements. 
+
+- Navigate to `/downloads/ppt/nc_merge` folder in the working directory. Then execute below command.
+
+	```bash
+	ncdump -h stp_cli_terraclimate_ppt_1958_2020.nc
+	```
+
+	![ncdump ppt](./img/ncdump-ppt.png)
+
+- Navigate to `/downloads/pet/nc_merge` folder in the working directory. Then execute below command.
+
+	```bash
+	ncdump -h stp_cli_terraclimate_pet_1958_2020.nc
+	```
+
+	![ncdump pet](./img/ncdump-pet.png)
