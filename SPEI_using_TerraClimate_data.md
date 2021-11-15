@@ -4,6 +4,21 @@ This section will explain on how to download TerraClimate's precipitation (ppt) 
 
 This step-by-step guide was tested using Mac mini Server - Late 2012, 2.3 GHz Quad-Core Intel Core i7, 16 GB 1600 MHz DDR3, running on macOS Catalina 10.15.7 and Windows 10 with Windows Subsystem for Linux enabled running on Parallels Desktop.
 
+## Index
+* [0. Working Directory](#0-working-directory)
+* [1. Software Requirement](#1-software-requirement)
+	* [1.1. macOS/Linux](#11-macoslinux)
+	* [1.2. Windows](#12-windows)
+* [2. Configure the python environment](#2-configure-the-python-environment)
+* [3. Preparing input](#3-preparing-input)
+	* [3.1. Input requirement](#31-input-requirement)
+	* [3.2. Download TerraClimate data](#32-download-terraclimate-data)
+	* [3.3.A. Merge netCDFs into single netCDF and Clip data using a bounding box based on area of interest](#33a-merge-netcdfs-into-single-netcdf-and-clip-data-using-a-bounding-box-based-on-area-of-interest)
+	* [3.3.B. Clip data using a bounding box based on area of interest and Merge netCDFs into single netCDF](#33b-clip-data-using-a-bounding-box-based-on-area-of-interest-and-merge-netcdfs-into-single-netcdf)
+	* [3.4. Check variable and attribute](#34-check-variable-and-attribute)
+
+
+
 ## 0. Working Directory
 
 For this tutorial, I am working on these folder `/Users/bennyistanto/Temp/TerraClimate/SPEI/` (applied to Mac/Linux machine) or `Z:/Temp/TerraClimate/SPEI/` (applied to Windows machine) directory. I have some folder inside this directory:
@@ -102,10 +117,10 @@ If you are new to using Bash refer to the following lessons with Software Carpen
 
 	`climate-indices` python package used for SPI calculation is rely on [**netCDF Operator (NCO)**](http://nco.sourceforge.net) and pyNCO wrapper sometimes produce an error in Windows. That's the reason why we will use Anaconda for Linux if you are using Windows machine.
 
-Reference: [https://gist.github.com/kauffmanes/5e74916617f9993bc3479f401dfec7da](https://gist.github.com/kauffmanes/5e74916617f9993bc3479f401dfec7da)
-
 - Go to [https://repo.anaconda.com/archive/](https://repo.anaconda.com/archive/) to find the list of Anaconda releases
+
 - Select the release you want. I have a 64-bit computer, so I chose the latest release ending in `x86_64.sh`. If I had a 32-bit computer, I'd select the `x86.sh` version. If you accidentally try to install the wrong one, you'll get a warning in the terminal. I chose `Anaconda3-2020.11-Linux-x86_64.sh`.
+
 - From the terminal run `wget https://repo.anaconda.com/archive/[YOUR VERSION]`. Example: 
 
 	```bash
@@ -119,7 +134,9 @@ Reference: [https://gist.github.com/kauffmanes/5e74916617f9993bc3479f401dfec7da]
 	```
 
 - Read the license agreement and follow the prompts to press Return/Enter to accept. Later will follow with question on accept the license terms, type `yes` and Enter. When asks you if you'd like the installer to prepend it to the path, press Return/Enter to confirm the location. Last question will be about initialize Anaconda3, type `yes` then Enter.
+
 - Close the terminal and reopen it to reload .bash configs. It will automatically activate `base` environment.
+
 - Deactivate `base` environment then set to `false` the confirguration of auto activate the `base` environment by typing
 
 	```bash
@@ -127,7 +144,9 @@ Reference: [https://gist.github.com/kauffmanes/5e74916617f9993bc3479f401dfec7da]
 	```
 
 - To test that it worked, `which python` in your Terminal. It should print a path that has anaconda in it. Mine is `/home/bennyistanto/anaconda3/bin/python`. If it doesn't have anaconda in the path, do the next step.
+
 - Manually add the Anaconda bin folder to your PATH. To do this, I added `"export PATH=/home/bennyistanto/anaconda3/bin:$PATH"` to the bottom of my `~/.bashrc` file.
+
 - Optionally install [**Visual Studio Code**](https://code.visualstudio.com) when prompted
 
 
@@ -172,9 +191,9 @@ SPEI requires monthly precipitation and potential evapotranspiration data, for b
 If you are prefer to use your own dataset also fine, you can still follow this guideline and adjust some steps and code related to filename, unit, format and structure.
 
 
-### 3.1. Input specification
+### 3.1. Input requirement
 
-The [climate-indices](https://pypi.org/project/climate-indices/) python package enables the user to calculate SPEI using any gridded netCDF dataset. However, there are certain specifications for input files that vary based on input type.
+The [climate-indices](https://pypi.org/project/climate-indices/) python package enables the user to calculate SPEI using any gridded netCDF dataset. However, there are certain requirements for input files that vary based on input type.
 
 - Precipitation and potential evapotranspiration unit must be written as `millimeters`, `milimeter`, `mm`, `inches`, `inch` or `in`.
 
@@ -338,8 +357,8 @@ This guideline provide example on how to use CDO and NCO to do some data extract
 	ncrcat -O -h stp_*.nc ../nc_merge/stp_cli_terraclimate_pet_1958_2020.nc
 	```
 
-### Check variable and attribute
-As explain in Step 3.1. Input specification above, we need to check the variable and attribute on above result to make sure all meet the requirements. 
+### 3.4. Check variable and attribute
+As explain in Step 3.1. Input requirement above, we need to check the variable and attribute on above result to make sure all meet the requirements. 
 
 - Navigate to `/downloads/ppt/nc_merge` folder in the working directory. Then execute below command.
 
@@ -356,3 +375,60 @@ As explain in Step 3.1. Input specification above, we need to check the variable
 	```
 
 	![ncdump pet](./img/ncdump-pet.png)
+
+- As you can see from above picture, all the requirement is completed: unit is in `mm`, order dimension for each variables is `lat`, `lon`, `time`, and `time` dimension is in `UNLIMITED`. Once this has completed, the dataset can be used as input to `climate-indices` package for computing SPEI. 
+
+
+# 4. Calculate SPI
+
+Let's start the calculation! And please make sure below points:
+
+- [x] You are still inside `climate_indices` environment to start working on SPEI calculation. 
+- [x] Variable name on precipitation `--var_name_precip`, usually TerraClimate data use `ppt` as name while other precipitation data like CHIRPS using `precip` and IMERG using `precipitation` as a variable name. To make sure, check using command `ncdump -h file.nc` then adjust it in SPEI script if needed.
+- [x] Variable name on potential evapotranspiration `--var_name_pet`, usually TerraClimate data use `pet` as name.
+- [x] Precipitation and potential evapotranspiration unit must be written as `millimeters`, `milimeter`, `mm`, `inches`, `inch` or `in`.
+- [x] Data dimension and order must be written as `lat`, `lon`, `time` (Windows machine required this order) or `time`, `lat`, `lon` (Works tested on Mac/Linux and Linux running on WSL).
+
+- In your Terminal, run the following code.
+
+	``` bash
+	process_climate_indices --index spei --periodicity monthly --netcdf_precip /Users/benny/Temp/TERRACLIMATE/SPEI/downloads/ppt/nc_merge/stp_cli_terraclimate_ppt_1958_2020.nc --var_name_precip ppt --netcdf_pet /Users/benny/Temp/TERRACLIMATE/SPEI/downloads/pet/nc_merge/stp_cli_terraclimate_pet_1958_2020.nc --var_name_pet pet --output_file_base /Users/benny/Temp/TERRACLIMATE/SPEI/outputs/nc_original/spt_cli_spei --scales 1 2 3 6 9 12 18 24 36 48 60 72 --calibration_start_year 1983 --calibration_end_year 2016 --multiprocessing all
+	```
+
+- Above code is example for calculating SPEI 1 to 72-months. It's ok if you think you only need some of them. Example: you are interested to calculate SPEI 1 - 3-months or SPEI 12-months, then adjust above code into `--scales 1 2 3` or `--scales 12`.
+
+![IMERG SPI](./img/imerg-spi.png)
+
+The above command will compute SPI (standardized precipitation index, both gamma and Pearson Type III distributions) from an input precipitation dataset (in this case, IMERG precipitation dataset). The input dataset is monthly rainfall accumulation data and the calibration period used will be Jun-2000 through Dec-2020. The index will be computed at `1`,`2`,`3`,`6`,`9`,`12`,`24`,`36`,`48`,`60` and `72-month` timescales. The output files will be <`out_dir>/java_IMERG_spi_gamma_xx.nc`, and `<out_dir>/java_IMERG_spi_pearson_xx.nc`.
+
+The output files will be:
+
+Gamma
+
+1. 1-month: `/Output_nc/java_IMERG_spi_gamma_01.nc`</br>
+2. 2-month: `/Output_nc/java_IMERG_spi_gamma_02.nc`</br>
+3. 3-month: `/Output_nc/java_IMERG_spi_gamma_03.nc`</br>
+4. 6-month: `/Output_nc/java_IMERG_spi_gamma_06.nc`</br>
+5. 9-month: `/Output_nc/java_IMERG_spi_gamma_09.nc`</br>
+6. 12-month: `/Output_nc/java_IMERG_spi_gamma_12.nc`</br>
+7. 24-month: `/Output_nc/java_IMERG_spi_gamma_24.nc`</br>
+8. 36-month: `/Output_nc/java_IMERG_spi_gamma_36.nc`</br>
+9. 48-month: `/Output_nc/java_IMERG_spi_gamma_48.nc`</br>
+10. 60-month: `/Output_nc/java_IMERG_spi_gamma_60.nc`</br>
+11. 72-month: `/Output_nc/java_IMERG_spi_gamma_72.nc`</br>
+
+Pearson
+
+1. 1-month: `/Output_nc/java_IMERG_spi_pearson_01.nc`</br>
+2. 2-month: `/Output_nc/java_IMERG_spi_pearson_02.nc`</br>
+3. 3-month: `/Output_nc/java_IMERG_spi_pearson_03.nc`</br>
+4. 6-month: `/Output_nc/java_IMERG_spi_pearson_06.nc`</br>
+5. 9-month: `/Output_nc/java_IMERG_spi_pearson_09.nc`</br>
+6. 12-month: `/Output_nc/java_IMERG_spi_pearson_12.nc`</br>
+7. 24-month: `/Output_nc/java_IMERG_spi_pearson_24.nc`</br>
+8. 36-month: `/Output_nc/java_IMERG_spi_pearson_36.nc`</br>
+9. 48-month: `/Output_nc/java_IMERG_spi_pearson_48.nc`</br>
+10. 60-month: `/Output_nc/java_IMERG_spi_pearson_60.nc`</br>
+11. 72-month: `/Output_nc/java_IMERG_spi_pearson_72.nc`</br>
+
+Parallelization will occur utilizing all CPUs.

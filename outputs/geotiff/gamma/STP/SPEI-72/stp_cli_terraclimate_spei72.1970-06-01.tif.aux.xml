@@ -1,0 +1,19 @@
+<PAMDataset>
+  <Metadata>
+    <MDI key="long_name">Standardized Precipitation Evapotranspiration Index (Gamma distribution), 72-month</MDI>
+    <MDI key="missing_value">nan</MDI>
+  </Metadata>
+  <PAMRasterBand band="1">
+    <NoDataValue le_hex_equiv="000000000000F87F">nan</NoDataValue>
+    <Metadata>
+      <MDI key="DIM_time_INDEX">0</MDI>
+      <MDI key="DIM_time_UNIT">days since 1900-01-01</MDI>
+      <MDI key="DIM_time_VALUE">25718</MDI>
+      <MDI key="STATISTICS_MAXIMUM">1.2540671825409</MDI>
+      <MDI key="STATISTICS_MEAN">0.72054732301169</MDI>
+      <MDI key="STATISTICS_MINIMUM">0.14017677307129</MDI>
+      <MDI key="STATISTICS_STDDEV">0.3372157376835</MDI>
+      <MDI key="STATISTICS_VALID_PERCENT">2.182</MDI>
+    </Metadata>
+  </PAMRasterBand>
+</PAMDataset>
