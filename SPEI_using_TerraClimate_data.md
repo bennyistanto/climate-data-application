@@ -440,7 +440,7 @@ Let's start the calculation!
 
 Parallelization will occur utilizing all CPUs.
 
-When the SPEI calculation completed, move arrange all the output by moving SPEI files with gamma to `gamma`folder and with pearson to `perason` folder.
+When the SPEI calculation completed, move arrange all the output by moving SPEI files with gamma to `gamma`folder and with pearson to `pearson` folder.
 
 For the translation to GeoTIFF as a final output, we only use SPEI gamma version.
 
