@@ -505,7 +505,7 @@ Congrats, now you are able to calculate SPEI based on monthly rainfall in netCDF
 
 ## 7. Global SPEI data
 
-Global SPEI-12 data using TerraClimate has been computed, other SPEI time period will follow. The monthly SPEI data is available in GeoTIFF format at JNB Server public directory: J:\Data\GLOBAL\CLIMATE\climate-indices\spei\spei-12\
+Global SPEI-12 data using TerraClimate has been computed, other SPEI for different time period will follow. The monthly SPEI data is available in GeoTIFF format at JNB Server public directory: J:\Data\GLOBAL\CLIMATE\climate-indices\spei\spei-12\
 
 
 ### 7.1. Example output
