@@ -2,7 +2,7 @@
 
 Mapping the extent of a natural hazard (e.g., assessing areas with a high risk) or disaster is a first step in disaster risk management and emergency response. Subsequently, exposure mapping enables the estimation of the impact of hazards or disasters, for example, regarding the number of affected inhabitants or infrastructure. 
 
-This section describes in detail the methodology and analysis operations required for climate-based product data, to meet the user requirements of the World Bank at country, regional and global level. 
+This section describes in detail the methodology and analysis operations required for climate-based product data, to meet the user requirements of the GOST team of World Bank at country, regional and global level. 
 
 ## Index
 * [Climate Data](#climate-data)
