@@ -392,7 +392,7 @@ Let's start the calculation!
 - In your Terminal, run the following code.
 
 	``` bash
-	process_climate_indices --index spei --periodicity monthly --netcdf_precip /Users/benny/Temp/TERRACLIMATE/SPEI/downloads/ppt/nc_merge/stp_cli_terraclimate_ppt_1958_2020.nc --var_name_precip ppt --netcdf_pet /Users/benny/Temp/TERRACLIMATE/SPEI/downloads/pet/nc_merge/stp_cli_terraclimate_pet_1958_2020.nc --var_name_pet pet --output_file_base /Users/benny/Temp/TERRACLIMATE/SPEI/outputs/nc_original/spt_cli_spei --scales 1 2 3 6 9 12 18 24 36 48 60 72 --calibration_start_year 1983 --calibration_end_year 2016 --multiprocessing all
+	process_climate_indices --index spei --periodicity monthly --netcdf_precip /Users/benny/Temp/TERRACLIMATE/SPEI/downloads/ppt/nc_merge/stp_cli_terraclimate_ppt_1958_2020.nc --var_name_precip ppt --netcdf_pet /Users/benny/Temp/TERRACLIMATE/SPEI/downloads/pet/nc_merge/stp_cli_terraclimate_pet_1958_2020.nc --var_name_pet pet --output_file_base /Users/benny/Temp/TERRACLIMATE/SPEI/outputs/nc_original/spt_cli_spei --scales 1 2 3 6 9 12 18 24 36 48 60 72 --calibration_start_year 1958 --calibration_end_year 2020 --multiprocessing all
 	```
 
 - Above code is example for calculating SPEI 1 to 72-months. It's ok if you think you only need some of them. Example: you are interested to calculate SPEI 1 - 3-months or SPEI 12-months, then adjust above code into `--scales 1 2 3` or `--scales 12`.
@@ -434,6 +434,8 @@ Let's start the calculation!
 Parallelization will occur utilizing all CPUs.
 
 When the SPEI calculation completed, move arrange all the output by moving SPEI files with gamma to `gamma`folder and with pearson to `perason` folder.
+
+For the translation to GeoTIFF as a final output, we only use SPEI gamma version.
 
 
 ## 5. Visualize the result using Panoply
@@ -478,9 +480,9 @@ We need CDO to do a conversion of the result into GeoTIFF format, and CDO requir
 	ncdump -h stp_cli_spei_gamma_12.nc
 	```
 
-- Then convert all `stp_cli_spei_gamma_12.nc` value into GeoTIFF with `time` dimension information as the filename using CDO and GDAL.
+- Then convert all `stp_cli_spei_gamma_12.nc` value into GeoTIFF with `time` dimension information as the filename using CDO and GDAL. Usually the geotiff image will not have projection information, so we will add that information via the script: `-a_ullr ulx uly lrx lry -a_srs EPSG:4326`
 
-- Execute below script and save the result to folder `Output_TIF`
+- Execute below script and save the result to folder `/outputs/geotiff/gamma/STP/SPEI-12`
 
 	``` bash
 	for t in `cdo showdate stp_cli_spei_gamma_12.nc`; do
@@ -491,4 +493,4 @@ We need CDO to do a conversion of the result into GeoTIFF format, and CDO requir
 
 - Next, you can continue to translate other SPEI files.
 
-Congrats, now you are able to calculate SPEI based on monthly rainfall in netCDF.
+Congrats, now you are able to calculate SPEI based on monthly rainfall in netCDF and translate the output into GeoTIFF format.
