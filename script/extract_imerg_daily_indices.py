@@ -29,7 +29,7 @@ PROCESS
     (v)   Number of maximum concecutive days derived from each consecutive dry days data
 
 APPLICATION
-    The accumulation value will use to identified the daily drought duration accumulation, 
+    The accumulation value will use to identified the daily drought/wet duration accumulation, 
     days by days, month by month, year by year.
 
 REQUIREMENT
