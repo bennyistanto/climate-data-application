@@ -78,7 +78,7 @@ def execute_nc2tif(nc2tif_temp, nc2tif_final, ncfolder):
 
     # Spatial reference WGS-84
     sr = arcpy.SpatialReference(4326)
-    land_subset = "Z:\\Temp\\IMERG\\Subset\\wld_bnd_subset_imerg_01_deg_grid_diss_a.shp"
+    land_subset = "J:\\Data\\GLOBAL\\CLIMATE\\imerg\\subset\\wld_bnd_subset_imerg_01_deg_grid_diss_a.shp"
 
     # Loop through a list of files in the workspace
     ncfiles = arcpy.ListFiles("*.nc4")
