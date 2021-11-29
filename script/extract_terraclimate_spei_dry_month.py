@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 """
 NAME
-    extract_spei_dry_month.py
+    extract_terraclimate_spei_dry_month.py
     
 DESCRIPTION
     Input data for this script wil use TERRACLIMATE's SPEI-12, generated using pypi climate-indices
@@ -17,7 +17,7 @@ PROCESS
     (iii) For number of consecutive information, it will accumulate to next data calculation result if the value = 1. 
     	    If not, start from 0 again.
     (iv)  Total dry month derived from each dry month data
-    (v)   Number of maximum conceutive months derived from each consecutive dry month data
+    (v)   Number of maximum concecutive months derived from each consecutive dry month data
 
 APPLICATION
     The accumulation value will use to identified the monthly drought duration accumulation, 
