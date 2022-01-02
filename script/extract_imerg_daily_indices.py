@@ -78,7 +78,7 @@ def execute_nc2tif(nc2tif_temp, nc2tif_final, ncfolder):
 
     # Spatial reference WGS-84
     sr = arcpy.SpatialReference(4326)
-    land_subset = "J:\\Data\\GLOBAL\\CLIMATE\\imerg\\subset\\wld_bnd_subset_imerg_01_deg_grid_diss_a.shp"
+    land_subset = "X:\\Temp\\imerg\\subset\\wld_bnd_subset_imerg_01_deg_grid_diss_a.shp"
 
     # Loop through a list of files in the workspace
     ncfiles = arcpy.ListFiles("*.nc4")
@@ -115,7 +115,7 @@ def execute_nc2tif(nc2tif_temp, nc2tif_final, ncfolder):
         ymd = nc4[i_imerg + 7:i_imerg+7+8]
         
         # Output clip layer using new filename and add YYYYMMDD information
-        outClipLayer = os.path.join(nc2tif_final, "wld_cli_imerg."+ymd+".1d.tif")
+        outClipLayer = os.path.join(nc2tif_final, "wld_cli_1d_imerg_"+ymd+".tif")
 
         # Extract by mask
         print("Clip raster "+parseName+".tif with land subset")     
@@ -128,6 +128,28 @@ def execute_nc2tif(nc2tif_temp, nc2tif_final, ncfolder):
     print("Translating netCDF to GeoTIFF and clip with land subset is completed")
 
 
+# Check precipitation data in GeoTIFF format
+def create_daily_List(_tif_folder):
+    print("start reading list of daily Rainfall data....")
+    print("looking for file with naming wld_cli_1d_imerg_YYYYMMDD.tif")
+    
+    Daily_Date_List=[]
+    
+    for Daily_Data in os.listdir(_tif_folder):
+        
+        print("found " + Daily_Data+ " in the daily Rainfall folder")
+            
+        i_imerg = Daily_Data.index('imerg_')
+        ymd = Daily_Data[i_imerg + 6:i_imerg+6+8]
+            
+        Daily_Data_Date = ymd            
+        Daily_Date_List.append(Daily_Data_Date)
+    
+    return sorted(Daily_Date_List)
+
+
+#############
+# DRY DAYS
 # Check if there is DRY Days data in output folder
 def create_DD_List(_DD_folder):
     print("start reading existing DRY Days Dataset....")
@@ -136,89 +158,13 @@ def create_DD_List(_DD_folder):
     DD_Date_List=[]
     
     for DD_Data in os.listdir(_DD_folder):
-        if DD_Data.endswith(".tif") or DD_Data.endswith(".tiff"):
-            print("found " + DD_Data + " in the DRY Days folder")
+        print("found " + DD_Data + " in the DRY Days folder")
             
-            parse_String = DD_Data.split('_')
-            DD_Data_Date = parse_String[4]
-            DD_Date_List.append(DD_Data_Date)
+        parse_String = DD_Data.split('_')
+        DD_Data_Date = parse_String[4]
+        DD_Date_List.append(DD_Data_Date)
     
     return DD_Date_List
-
-
-# Check if there is WET Days data in output folder
-def create_WD_List(_WD_folder):
-    print("start reading existing WET Days Dataset....")
-    print("looking for file with naming wld_cli_imerg_wet_YYYYMMDD")
-    
-    WD_Date_List=[]
-    
-    for WD_Data in os.listdir(_WD_folder):
-        if WD_Data.endswith(".tif") or WD_Data.endswith(".tiff"):
-            print("found " + WD_Data + " in the WET Days folder")
-            
-            parse_String = WD_Data.split('_')
-            WD_Data_Date = parse_String[4]
-            WD_Date_List.append(WD_Data_Date)
-    
-    return WD_Date_List
-
-
-# Check if there is Consecutive DRY Days data in output folder
-def create_CDD_List(_CDD_folder):
-    print("start reading existing Consecutive DRY Days Dataset....")
-    print("looking for file with naming wld_cli_imerg_cdd_YYYYMMDD")
-    
-    CDD_Date_List=[]
-    
-    for CDD_Data in os.listdir(_CDD_folder):
-        if CDD_Data.endswith(".tif") or CDD_Data.endswith(".tiff"):
-            print("found " + CDD_Data + " in the Consecutive DRY Days folder")
-            
-            parse_String = CDD_Data.split('_')
-            CDD_Data_Date = parse_String[4]
-            CDD_Date_List.append(CDD_Data_Date)
-    
-    return CDD_Date_List
-
-
-# Check if there is Consecutive WET Days data in output folder
-def create_CWD_List(_CWD_folder):
-    print("start reading existing Consecutive WET Days Dataset....")
-    print("looking for file with naming wld_cli_imerg_cwd_YYYYMMDD")
-    
-    CWD_Date_List=[]
-    
-    for CWD_Data in os.listdir(_CWD_folder):
-        if CWD_Data.endswith(".tif") or CWD_Data.endswith(".tiff"):
-            print("found " + CWD_Data + " in the Consecutive WET Days folder")
-            
-            parse_String = CWD_Data.split('_')
-            CWD_Data_Date = parse_String[4]
-            CWD_Date_List.append(CWD_Data_Date)
-    
-    return CWD_Date_List
-
-
-# Check precipitation data in GeoTIFF format
-def create_daily_List(_tif_folder):
-    print("start reading list of daily Rainfall data....")
-    print("looking for file with naming wld_cli_imerg.YYYYMMDD.1d.tif")
-    
-    Daily_Date_List=[]
-    
-    for Daily_Data in os.listdir(_tif_folder):
-        
-        if Daily_Data.endswith(".tif") or Daily_Data.endswith(".tiff"):
-            print("found " + Daily_Data+ " in the daily Rainfall folder")
-            
-            i_imerg = Daily_Data.index('imerg.')
-            ymd = Daily_Data[i_imerg + 6:i_imerg+6+8]
-            
-            Daily_Data_Date = ymd            
-            Daily_Date_List.append(Daily_Data_Date)
-    
-    return sorted(Daily_Date_List)
 
 
 # Execute first Dry condition
@@ -231,10 +177,10 @@ def execute_first_DD(_tiffolder, _DDFolder, threshold):
     first_date = min(daily_list)
     print("execute first Rainfall data from date "+first_date)
     
-    first_data_name = 'wld_cli_imerg.{0}{1}{2}.1d.tif'.format(first_date[0:4], first_date[4:6], first_date[6:8])
+    first_data_name = 'wld_cli_1d_imerg_{0}{1}{2}.tif'.format(first_date[0:4], first_date[4:6], first_date[6:8])
     first_daily_data = os.path.join(_tiffolder, first_data_name)
     daily_Date = date(int(first_date[0:4]), int(first_date[4:6]), int(first_date[6:8]))
-    dry_date = daily_Date + timedelta(days=1)
+    dry_date = daily_Date #+ timedelta(days=1)
     print("creating dry data "+str(dry_date)+ " from daily Rainfall data from "+str(daily_Date))
     
     DDyear = str(dry_date.year)
@@ -255,108 +201,6 @@ def execute_first_DD(_tiffolder, _DDFolder, threshold):
     print("file " + DDFilename + " is created")
 
 
-# Execute first WET condition
-def execute_first_WD(_tiffolder, _WDFolder, threshold):
-    # Spatial reference WGS-84
-    sr = arcpy.SpatialReference(4326)
-    print("looking at the first daily Rainfall data in tif folder...")
-    
-    daily_list = create_daily_List(_tiffolder)
-    first_date = min(daily_list)
-    print("execute first Rainfall data from date "+first_date)
-    
-    first_data_name = 'wld_cli_imerg.{0}{1}{2}.1d.tif'.format(first_date[0:4], first_date[4:6], first_date[6:8])
-    first_daily_data = os.path.join(_tiffolder, first_data_name)
-    daily_Date = date(int(first_date[0:4]), int(first_date[4:6]), int(first_date[6:8]))
-    wet_date = daily_Date + timedelta(days=1)
-    print("creating wet data "+str(wet_date)+ " from daily Rainfall data from "+str(daily_Date))
-    
-    WDyear = str(wet_date.year)
-    WDmonth = str(wet_date.month)
-    WDday = str(wet_date.day)
-    print(str(wet_date))
-    
-    WDFilename = 'wld_cli_imerg_wet_{0}{1}{2}.tif'.format(WDyear.zfill(4), WDmonth.zfill(2), WDday.zfill(2))
-    print("Processing "+WDFilename)
-    
-    arcpy.CheckOutExtension("spatial")
-    
-    outCon = Con(Raster(first_daily_data) > Float(threshold), 1, 0)
-    outCon.save(os.path.join(_WDFolder, WDFilename))
-    arcpy.DefineProjection_management(os.path.join(_WDFolder, WDFilename), sr)
-    
-    arcpy.CheckInExtension("spatial")
-    print("file " + WDFilename + " is created")
-
-
-# Execute first Dry condition
-def execute_first_CDD(_tiffolder, _CDDFolder, threshold):
-    # Spatial reference WGS-84
-    sr = arcpy.SpatialReference(4326)
-    print("looking at the first daily Rainfall data in tif folder...")
-    
-    daily_list = create_daily_List(_tiffolder)
-    first_date = min(daily_list)
-    print("execute first Rainfall data from date "+first_date)
-    
-    first_data_name = 'wld_cli_imerg.{0}{1}{2}.1d.tif'.format(first_date[0:4], first_date[4:6], first_date[6:8])
-    first_daily_data = os.path.join(_tiffolder, first_data_name)
-    daily_Date = date(int(first_date[0:4]), int(first_date[4:6]), int(first_date[6:8]))
-    dry_date = daily_Date + timedelta(days=1)
-    print("creating dry data "+str(dry_date)+ " from daily Rainfall data from "+str(daily_Date))
-    
-    CDDyear = str(dry_date.year)
-    CDDmonth = str(dry_date.month)
-    CDDday = str(dry_date.day)
-    print(str(dry_date))
-    
-    CDDFilename = 'wld_cli_imerg_cdd_{0}{1}{2}.tif'.format(CDDyear.zfill(4), CDDmonth.zfill(2), CDDday.zfill(2))
-    print("Processing "+CDDFilename)
-    
-    arcpy.CheckOutExtension("spatial")
-    
-    outCon = Con(Raster(first_daily_data) < Float(threshold), 1, 0)
-    outCon.save(os.path.join(_CDDFolder, CDDFilename))
-    arcpy.DefineProjection_management(os.path.join(_CDDFolder, CDDFilename), sr)
-    
-    arcpy.CheckInExtension("spatial")
-    print("file " + CDDFilename + " is created")
-
-
-# Execute first Wet condition
-def execute_first_CWD(_tiffolder, _CWDFolder, threshold):
-    # Spatial reference WGS-84
-    sr = arcpy.SpatialReference(4326)
-    print("looking at the first daily Rainfall data in tif folder...")
-    
-    daily_list = create_daily_List(_tiffolder)
-    first_date = min(daily_list)
-    print("execute first Rainfall data from date "+first_date)
-    
-    first_data_name = 'wld_cli_imerg.{0}{1}{2}.1d.tif'.format(first_date[0:4], first_date[4:6], first_date[6:8])
-    first_daily_data = os.path.join(_tiffolder, first_data_name)
-    daily_Date = date(int(first_date[0:4]), int(first_date[4:6]), int(first_date[6:8]))
-    wet_date = daily_Date + timedelta(days=1)
-    print("creating wet data "+str(wet_date)+ " from daily Rainfall data from "+str(daily_Date))
-    
-    CWDyear = str(wet_date.year)
-    CWDmonth = str(wet_date.month)
-    CWDday = str(wet_date.day)
-    print(str(wet_date))
-    
-    CWDFilename = 'wld_cli_imerg_cwd_{0}{1}{2}.tif'.format(CWDyear.zfill(4), CWDmonth.zfill(2), CWDday.zfill(2))
-    print("Processing "+CWDFilename)
-    
-    arcpy.CheckOutExtension("spatial")
-    
-    outCon = Con(Raster(first_daily_data) > Float(threshold), 1, 0)
-    outCon.save(os.path.join(_CWDFolder, CWDFilename))
-    arcpy.DefineProjection_management(os.path.join(_CWDFolder, CWDFilename), sr)
-    
-    arcpy.CheckInExtension("spatial")
-    print("file " + CWDFilename + " is created")
-
-
 # Execute next DRY Days data
 def execute_DD(_lastdate, _tiffolder, _DD_folder, threshold):
     # Spatial reference WGS-84
@@ -365,7 +209,9 @@ def execute_DD(_lastdate, _tiffolder, _DD_folder, threshold):
     date_formatted = date(int(_lastdate[0:4]), int(_lastdate[4:6]), int(_lastdate[6:8]))
     last_dryname = 'wld_cli_imerg_dry_{0}'.format(_lastdate)
     last_dryfile = os.path.join(_DD_folder, last_dryname)
-    next_dailyname = 'wld_cli_imerg.{0}{1}{2}.1d.tif'.format(_lastdate[0:4], _lastdate[4:6], _lastdate[6:8])
+    next_daily_date = date_formatted + timedelta(days=1)
+    next_dailyname = 'wld_cli_1d_imerg_{0}.tif'.format(next_daily_date.strftime('%Y%m%d'))
+    #next_dailyname = 'wld_cli_1d_imerg_{0}{1}{2}.tif'.format(_lastdate[0:4], _lastdate[4:6], _lastdate[6:8])
     next_dailydata = os.path.join(_tiffolder, next_dailyname)
     
     if arcpy.Exists(next_dailydata):
@@ -377,7 +223,7 @@ def execute_DD(_lastdate, _tiffolder, _DD_folder, threshold):
         DDmonth1 = str(new_dry_date.month)
         DDday1 = str(new_dry_date.day)
         new_dry_name = 'wld_cli_imerg_dry_{0}{1}{2}.tif'.format(DDyear1.zfill(4), DDmonth1.zfill(2), DDday1.zfill(2))
-        print("Processing DRY Days from "+last_dryfile+" and "+next_dailydata)
+        print("Processing DRY Days from "+next_dailydata)
         
         arcpy.CheckOutExtension("spatial")
         
@@ -387,111 +233,6 @@ def execute_DD(_lastdate, _tiffolder, _DD_folder, threshold):
         
         arcpy.CheckInExtension("spatial")
         print("DRY Days File "+new_dry_name+" is created")
-    
-    else:
-        print("next daily data is not available. Exit...")
-
-
-# Execute next WET Days data
-def execute_WD(_lastdate, _tiffolder, _WD_folder, threshold):
-    # Spatial reference WGS-84
-    sr = arcpy.SpatialReference(4326)
-    
-    date_formatted = date(int(_lastdate[0:4]), int(_lastdate[4:6]), int(_lastdate[6:8]))
-    last_wetname = 'wld_cli_imerg_wet_{0}'.format(_lastdate)
-    last_wetfile = os.path.join(_WD_folder, last_wetname)
-    next_dailyname = 'wld_cli_imerg.{0}{1}{2}.1d.tif'.format(_lastdate[0:4], _lastdate[4:6], _lastdate[6:8])
-    next_dailydata = os.path.join(_tiffolder, next_dailyname)
-    
-    if arcpy.Exists(next_dailydata):
-        print("next daily data is available...")
-        print("start processing next WET Days...")
-        
-        new_wet_date = date_formatted + timedelta(days=1)
-        WDyear1 = str(new_wet_date.year)
-        WDmonth1 = str(new_wet_date.month)
-        WDday1 = str(new_wet_date.day)
-        new_wet_name = 'wld_cli_imerg_wet_{0}{1}{2}.tif'.format(WDyear1.zfill(4), WDmonth1.zfill(2), WDday1.zfill(2))
-        print("Processing WET Days from "+last_wetfile+" and "+next_dailydata)
-        
-        arcpy.CheckOutExtension("spatial")
-        
-        outWDCon = Con(Raster(next_dailydata) < Float(threshold), 1, 0)
-        outWDCon.save(os.path.join(_WD_folder, new_wet_name))
-        arcpy.DefineProjection_management(os.path.join(_WD_folder, new_wet_name), sr)
-        
-        arcpy.CheckInExtension("spatial")
-        print("WET Days File "+new_wet_name+" is created")
-    
-    else:
-        print("next daily data is not available. Exit...")
-
-
-# Execute next Consecutive DRY Days data
-def execute_CDD(_lastdate, _tiffolder, _CDD_folder, threshold):
-    # Spatial reference WGS-84
-    sr = arcpy.SpatialReference(4326)
-    
-    date_formatted = date(int(_lastdate[0:4]), int(_lastdate[4:6]), int(_lastdate[6:8]))
-    last_dryname = 'wld_cli_imerg_cdd_{0}'.format(_lastdate)
-    last_dryfile = os.path.join(_CDD_folder, last_dryname)
-    next_dailyname = 'wld_cli_imerg.{0}{1}{2}.1d.tif'.format(_lastdate[0:4], _lastdate[4:6], _lastdate[6:8])
-    next_dailydata = os.path.join(_tiffolder, next_dailyname)
-    
-    if arcpy.Exists(next_dailydata):
-        print("next daily data is available...")
-        print("start processing next Consecutive DRY Days...")
-        
-        new_dry_date = date_formatted + timedelta(days=1)
-        CDDyear1 = str(new_dry_date.year)
-        CDDmonth1 = str(new_dry_date.month)
-        CDDday1 = str(new_dry_date.day)
-        new_dry_name = 'wld_cli_imerg_cdd_{0}{1}{2}.tif'.format(CDDyear1.zfill(4), CDDmonth1.zfill(2), CDDday1.zfill(2))
-        print("Processing Consecutive DRY Days from "+last_dryfile+" and "+next_dailydata)
-        
-        arcpy.CheckOutExtension("spatial")
-        
-        outCDDCon = Con(Raster(next_dailydata) < Float(threshold), Raster(last_dryfile)+1, 0)
-        outCDDCon.save(os.path.join(_CDD_folder, new_dry_name))
-        arcpy.DefineProjection_management(os.path.join(_CDD_folder, new_dry_name), sr)
-        
-        arcpy.CheckInExtension("spatial")
-        print("Consecutive DRY Days File "+new_dry_name+" is created")
-    
-    else:
-        print("next daily data is not available. Exit...")
-
-
-# Execute next Consecutive DRY Days data
-def execute_CWD(_lastdate, _tiffolder, _CWD_folder, threshold):
-    # Spatial reference WGS-84
-    sr = arcpy.SpatialReference(4326)
-    
-    date_formatted = date(int(_lastdate[0:4]), int(_lastdate[4:6]), int(_lastdate[6:8]))
-    last_wetname = 'wld_cli_imerg_cwd_{0}'.format(_lastdate)
-    last_wetfile = os.path.join(_CWD_folder, last_wetname)
-    next_dailyname = 'wld_cli_imerg.{0}{1}{2}.1d.tif'.format(_lastdate[0:4], _lastdate[4:6], _lastdate[6:8])
-    next_dailydata = os.path.join(_tiffolder, next_dailyname)
-    
-    if arcpy.Exists(next_dailydata):
-        print("next daily data is available...")
-        print("start processing next Consecutive WET Days...")
-        
-        new_wet_date = date_formatted + timedelta(days=1)
-        CWDyear1 = str(new_wet_date.year)
-        CWDmonth1 = str(new_wet_date.month)
-        CWDday1 = str(new_wet_date.day)
-        new_wet_name = 'wld_cli_imerg_cwd_{0}{1}{2}.tif'.format(CWDyear1.zfill(4), CWDmonth1.zfill(2), CWDday1.zfill(2))
-        print("Processing Consecutive WET Days from "+last_wetfile+" and "+next_dailydata)
-        
-        arcpy.CheckOutExtension("spatial")
-        
-        outCWDCon = Con(Raster(next_dailydata) > Float(threshold), Raster(last_wetfile)+1, 0)
-        outCWDCon.save(os.path.join(_CWD_folder, new_wet_name))
-        arcpy.DefineProjection_management(os.path.join(_CWD_folder, new_wet_name), sr)
-        
-        arcpy.CheckInExtension("spatial")
-        print("Consecutive WET Days File "+new_wet_name+" is created")
     
     else:
         print("next daily data is not available. Exit...")
@@ -524,6 +265,7 @@ def create_DD(_DD_folder, _tiffolder, threshold):
     
     # process DRY Days to every daily data available after last DRY Days data
     while last_daily_date + timedelta(days=1) > last_DD_date:
+    #while last_daily_date > last_DD_date:
 
         execute_DD(last_date, _tiffolder, _DD_folder, threshold)
 
@@ -534,6 +276,96 @@ def create_DD(_DD_folder, _tiffolder, threshold):
         last_date='{0}{1}{2}.tif'.format(DDyear2.zfill(4), DDmonth2.zfill(2), DDday2.zfill(2))
 
     print("All DRY Days data is available")
+
+
+#############
+# WET DAYS
+# Check if there is WET Days data in output folder
+def create_WD_List(_WD_folder):
+    print("start reading existing WET Days Dataset....")
+    print("looking for file with naming wld_cli_imerg_wet_YYYYMMDD")
+    
+    WD_Date_List=[]
+    
+    for WD_Data in os.listdir(_WD_folder):
+        print("found " + WD_Data + " in the WET Days folder")
+            
+        parse_String = WD_Data.split('_')
+        WD_Data_Date = parse_String[4]
+        WD_Date_List.append(WD_Data_Date)
+    
+    return WD_Date_List
+
+
+# Execute first WET condition
+def execute_first_WD(_tiffolder, _WDFolder, threshold):
+    # Spatial reference WGS-84
+    sr = arcpy.SpatialReference(4326)
+    print("looking at the first daily Rainfall data in tif folder...")
+    
+    daily_list = create_daily_List(_tiffolder)
+    first_date = min(daily_list)
+    print("execute first Rainfall data from date "+first_date)
+    
+    first_data_name = 'wld_cli_1d_imerg_{0}{1}{2}.tif'.format(first_date[0:4], first_date[4:6], first_date[6:8])
+    first_daily_data = os.path.join(_tiffolder, first_data_name)
+    daily_Date = date(int(first_date[0:4]), int(first_date[4:6]), int(first_date[6:8]))
+    wet_date = daily_Date #+ timedelta(days=1)
+    print("creating wet data "+str(wet_date)+ " from daily Rainfall data from "+str(daily_Date))
+    
+    WDyear = str(wet_date.year)
+    WDmonth = str(wet_date.month)
+    WDday = str(wet_date.day)
+    print(str(wet_date))
+    
+    WDFilename = 'wld_cli_imerg_wet_{0}{1}{2}.tif'.format(WDyear.zfill(4), WDmonth.zfill(2), WDday.zfill(2))
+    print("Processing "+WDFilename)
+    
+    arcpy.CheckOutExtension("spatial")
+    
+    outCon = Con(Raster(first_daily_data) > Float(threshold), 1, 0)
+    outCon.save(os.path.join(_WDFolder, WDFilename))
+    arcpy.DefineProjection_management(os.path.join(_WDFolder, WDFilename), sr)
+    
+    arcpy.CheckInExtension("spatial")
+    print("file " + WDFilename + " is created")
+
+
+# Execute next WET Days data
+def execute_WD(_lastdate, _tiffolder, _WD_folder, threshold):
+    # Spatial reference WGS-84
+    sr = arcpy.SpatialReference(4326)
+    
+    date_formatted = date(int(_lastdate[0:4]), int(_lastdate[4:6]), int(_lastdate[6:8]))
+    last_wetname = 'wld_cli_imerg_wet_{0}'.format(_lastdate)
+    last_wetfile = os.path.join(_WD_folder, last_wetname)
+    next_daily_date = date_formatted + timedelta(days=1)
+    next_dailyname = 'wld_cli_1d_imerg_{0}.tif'.format(next_daily_date.strftime('%Y%m%d'))
+    #next_dailyname = 'wld_cli_1d_imerg_{0}{1}{2}.tif'.format(_lastdate[0:4], _lastdate[4:6], _lastdate[6:8])
+    next_dailydata = os.path.join(_tiffolder, next_dailyname)
+    
+    if arcpy.Exists(next_dailydata):
+        print("next daily data is available...")
+        print("start processing next WET Days...")
+        
+        new_wet_date = date_formatted + timedelta(days=1)
+        WDyear1 = str(new_wet_date.year)
+        WDmonth1 = str(new_wet_date.month)
+        WDday1 = str(new_wet_date.day)
+        new_wet_name = 'wld_cli_imerg_wet_{0}{1}{2}.tif'.format(WDyear1.zfill(4), WDmonth1.zfill(2), WDday1.zfill(2))
+        print("Processing WET Days from "+next_dailydata)
+        
+        arcpy.CheckOutExtension("spatial")
+        
+        outWDCon = Con(Raster(next_dailydata) < Float(threshold), 1, 0)
+        outWDCon.save(os.path.join(_WD_folder, new_wet_name))
+        arcpy.DefineProjection_management(os.path.join(_WD_folder, new_wet_name), sr)
+        
+        arcpy.CheckInExtension("spatial")
+        print("WET Days File "+new_wet_name+" is created")
+    
+    else:
+        print("next daily data is not available. Exit...")
 
 
 # Run the script
@@ -563,6 +395,7 @@ def create_WD(_WD_folder, _tiffolder, threshold):
     
     # process WET Days to every daily data available after last WET Days data
     while last_daily_date + timedelta(days=1) > last_WD_date:
+    #while last_daily_date > last_WD_date:    
 
         execute_WD(last_date, _tiffolder, _WD_folder, threshold)
 
@@ -573,6 +406,96 @@ def create_WD(_WD_folder, _tiffolder, threshold):
         last_date='{0}{1}{2}.tif'.format(WDyear2.zfill(4), WDmonth2.zfill(2), WDday2.zfill(2))
 
     print("All WET Days data is available")
+
+
+#############
+# CONSECUTIVE DRY DAYS
+# Check if there is Consecutive DRY Days data in output folder
+def create_CDD_List(_CDD_folder):
+    print("start reading existing Consecutive DRY Days Dataset....")
+    print("looking for file with naming wld_cli_cdd_1mm_imerg_YYYYMMDD")
+    
+    CDD_Date_List=[]
+    
+    for CDD_Data in os.listdir(_CDD_folder):
+        print("found " + CDD_Data + " in the Consecutive DRY Days folder")
+            
+        parse_String = CDD_Data.split('_')
+        CDD_Data_Date = parse_String[5]
+        CDD_Date_List.append(CDD_Data_Date)
+    
+    return CDD_Date_List
+
+
+# Execute first Dry condition
+def execute_first_CDD(_tiffolder, _CDDFolder, threshold):
+    # Spatial reference WGS-84
+    sr = arcpy.SpatialReference(4326)
+    print("looking at the first daily Rainfall data in tif folder...")
+    
+    daily_list = create_daily_List(_tiffolder)
+    first_date = min(daily_list)
+    print("execute first Rainfall data from date "+first_date)
+    
+    first_data_name = 'wld_cli_1d_imerg_{0}{1}{2}.tif'.format(first_date[0:4], first_date[4:6], first_date[6:8])
+    first_daily_data = os.path.join(_tiffolder, first_data_name)
+    daily_Date = date(int(first_date[0:4]), int(first_date[4:6]), int(first_date[6:8]))
+    dry_date = daily_Date #+ timedelta(days=1)
+    print("creating dry data "+str(dry_date)+ " from daily Rainfall data from "+str(daily_Date))
+    
+    CDDyear = str(dry_date.year)
+    CDDmonth = str(dry_date.month)
+    CDDday = str(dry_date.day)
+    print(str(dry_date))
+    
+    CDDFilename = 'wld_cli_cdd_1mm_imerg_{0}{1}{2}.tif'.format(CDDyear.zfill(4), CDDmonth.zfill(2), CDDday.zfill(2))
+    print("Processing "+CDDFilename)
+    
+    arcpy.CheckOutExtension("spatial")
+    
+    outCon = Con(Raster(first_daily_data) < Float(threshold), 1, 0)
+    outCon.save(os.path.join(_CDDFolder, CDDFilename))
+    arcpy.DefineProjection_management(os.path.join(_CDDFolder, CDDFilename), sr)
+    
+    arcpy.CheckInExtension("spatial")
+    print("file " + CDDFilename + " is created")
+
+
+# Execute next Consecutive DRY Days data
+def execute_CDD(_lastdate, _tiffolder, _CDD_folder, threshold):
+    # Spatial reference WGS-84
+    sr = arcpy.SpatialReference(4326)
+    
+    date_formatted = date(int(_lastdate[0:4]), int(_lastdate[4:6]), int(_lastdate[6:8]))
+    last_dryname = 'wld_cli_cdd_1mm_imerg_{0}'.format(_lastdate)
+    last_dryfile = os.path.join(_CDD_folder, last_dryname)
+    next_daily_date = date_formatted + timedelta(days=1)
+    next_dailyname = 'wld_cli_1d_imerg_{0}.tif'.format(next_daily_date.strftime('%Y%m%d'))
+    #next_dailyname = 'wld_cli_1d_imerg_{0}{1}{2}.tif'.format(_lastdate[0:4], _lastdate[4:6], _lastdate[6:8])
+    next_dailydata = os.path.join(_tiffolder, next_dailyname)
+    
+    if arcpy.Exists(next_dailydata):
+        print("next daily data is available...")
+        print("start processing next Consecutive DRY Days...")
+        
+        new_dry_date = date_formatted + timedelta(days=1)
+        CDDyear1 = str(new_dry_date.year)
+        CDDmonth1 = str(new_dry_date.month)
+        CDDday1 = str(new_dry_date.day)
+        new_dry_name = 'wld_cli_cdd_1mm_imerg_{0}{1}{2}.tif'.format(CDDyear1.zfill(4), CDDmonth1.zfill(2), CDDday1.zfill(2))
+        print("Processing Consecutive DRY Days from "+last_dryfile+" and "+next_dailydata)
+        
+        arcpy.CheckOutExtension("spatial")
+        
+        outCDDCon = Con(Raster(next_dailydata) < Float(threshold), Raster(last_dryfile)+1, 0)
+        outCDDCon.save(os.path.join(_CDD_folder, new_dry_name))
+        arcpy.DefineProjection_management(os.path.join(_CDD_folder, new_dry_name), sr)
+        
+        arcpy.CheckInExtension("spatial")
+        print("Consecutive DRY Days File "+new_dry_name+" is created")
+    
+    else:
+        print("next daily data is not available. Exit...")
 
 
 # Run the script
@@ -602,6 +525,7 @@ def create_CDD(_CDD_folder, _tiffolder, threshold):
     
     # process Consecutive DRY Days to every daily data available after last Consecutive DRY Days data
     while last_daily_date + timedelta(days=1) > last_CDD_date:
+    #while last_daily_date > last_CDD_date:
 
         execute_CDD(last_date, _tiffolder, _CDD_folder, threshold)
 
@@ -612,6 +536,96 @@ def create_CDD(_CDD_folder, _tiffolder, threshold):
         last_date='{0}{1}{2}.tif'.format(CDDyear2.zfill(4), CDDmonth2.zfill(2), CDDday2.zfill(2))
 
     print("All Consecutive DRY Days data is available")
+
+
+#############
+# CONSECUTIVE WET DAYS
+# Check if there is Consecutive WET Days data in output folder
+def create_CWD_List(_CWD_folder):
+    print("start reading existing Consecutive WET Days Dataset....")
+    print("looking for file with naming wld_cli_cwd_1mm_imerg_YYYYMMDD")
+    
+    CWD_Date_List=[]
+    
+    for CWD_Data in os.listdir(_CWD_folder):
+        print("found " + CWD_Data + " in the Consecutive WET Days folder")
+            
+        parse_String = CWD_Data.split('_')
+        CWD_Data_Date = parse_String[5]
+        CWD_Date_List.append(CWD_Data_Date)
+    
+    return CWD_Date_List
+
+
+# Execute first Wet condition
+def execute_first_CWD(_tiffolder, _CWDFolder, threshold):
+    # Spatial reference WGS-84
+    sr = arcpy.SpatialReference(4326)
+    print("looking at the first daily Rainfall data in tif folder...")
+    
+    daily_list = create_daily_List(_tiffolder)
+    first_date = min(daily_list)
+    print("execute first Rainfall data from date "+first_date)
+    
+    first_data_name = 'wld_cli_1d_imerg_{0}{1}{2}.tif'.format(first_date[0:4], first_date[4:6], first_date[6:8])
+    first_daily_data = os.path.join(_tiffolder, first_data_name)
+    daily_Date = date(int(first_date[0:4]), int(first_date[4:6]), int(first_date[6:8]))
+    wet_date = daily_Date + timedelta(days=1)
+    print("creating wet data "+str(wet_date)+ " from daily Rainfall data from "+str(daily_Date))
+    
+    CWDyear = str(wet_date.year)
+    CWDmonth = str(wet_date.month)
+    CWDday = str(wet_date.day)
+    print(str(wet_date))
+    
+    CWDFilename = 'wld_cli_cwd_1mm_imerg_{0}{1}{2}.tif'.format(CWDyear.zfill(4), CWDmonth.zfill(2), CWDday.zfill(2))
+    print("Processing "+CWDFilename)
+    
+    arcpy.CheckOutExtension("spatial")
+    
+    outCon = Con(Raster(first_daily_data) > Float(threshold), 1, 0)
+    outCon.save(os.path.join(_CWDFolder, CWDFilename))
+    arcpy.DefineProjection_management(os.path.join(_CWDFolder, CWDFilename), sr)
+    
+    arcpy.CheckInExtension("spatial")
+    print("file " + CWDFilename + " is created")
+
+
+# Execute next Consecutive DRY Days data
+def execute_CWD(_lastdate, _tiffolder, _CWD_folder, threshold):
+    # Spatial reference WGS-84
+    sr = arcpy.SpatialReference(4326)
+    
+    date_formatted = date(int(_lastdate[0:4]), int(_lastdate[4:6]), int(_lastdate[6:8]))
+    last_wetname = 'wld_cli_cwd_1mm_imerg_{0}'.format(_lastdate)
+    last_wetfile = os.path.join(_CWD_folder, last_wetname)
+    next_daily_date = date_formatted + timedelta(days=1)
+    next_dailyname = 'wld_cli_1d_imerg_{0}.tif'.format(next_daily_date.strftime('%Y%m%d'))
+    #next_dailyname = 'wld_cli_1d_imerg_{0}{1}{2}.tif'.format(_lastdate[0:4], _lastdate[4:6], _lastdate[6:8])
+    next_dailydata = os.path.join(_tiffolder, next_dailyname)
+    
+    if arcpy.Exists(next_dailydata):
+        print("next daily data is available...")
+        print("start processing next Consecutive WET Days...")
+        
+        new_wet_date = date_formatted + timedelta(days=1)
+        CWDyear1 = str(new_wet_date.year)
+        CWDmonth1 = str(new_wet_date.month)
+        CWDday1 = str(new_wet_date.day)
+        new_wet_name = 'wld_cli_cwd_1mm_imerg_{0}{1}{2}.tif'.format(CWDyear1.zfill(4), CWDmonth1.zfill(2), CWDday1.zfill(2))
+        print("Processing Consecutive WET Days from "+last_wetfile+" and "+next_dailydata)
+        
+        arcpy.CheckOutExtension("spatial")
+        
+        outCWDCon = Con(Raster(next_dailydata) > Float(threshold), Raster(last_wetfile)+1, 0)
+        outCWDCon.save(os.path.join(_CWD_folder, new_wet_name))
+        arcpy.DefineProjection_management(os.path.join(_CWD_folder, new_wet_name), sr)
+        
+        arcpy.CheckInExtension("spatial")
+        print("Consecutive WET Days File "+new_wet_name+" is created")
+    
+    else:
+        print("next daily data is not available. Exit...")
 
 
 # Run the script
@@ -641,6 +655,7 @@ def create_CWD(_CWD_folder, _tiffolder, threshold):
     
     # process Consecutive WET Days to every daily data available after last Consecutive WET Days data
     while last_daily_date + timedelta(days=1) > last_CWD_date:
+    #while last_daily_date > last_CWD_date:
 
         execute_CWD(last_date, _tiffolder, _CWD_folder, threshold)
 
@@ -653,6 +668,8 @@ def create_CWD(_CWD_folder, _tiffolder, threshold):
     print("All Consecutive WET Days data is available")
 
 
+#############
+# STATS
 # Execute sum of DRY Days
 def execute_SUM_DD(output_folder, folder_to_extract):
     
