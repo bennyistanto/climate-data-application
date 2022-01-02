@@ -137,13 +137,14 @@ def create_daily_List(_tif_folder):
     
     for Daily_Data in os.listdir(_tif_folder):
         
-        print("found " + Daily_Data+ " in the daily Rainfall folder")
+        if Daily_Data.endswith(".tif"):
+            print("found " + Daily_Data+ " in the daily Rainfall folder")
             
-        i_imerg = Daily_Data.index('imerg_')
-        ymd = Daily_Data[i_imerg + 6:i_imerg+6+8]
+            i_imerg = Daily_Data.index('imerg_')
+            ymd = Daily_Data[i_imerg + 6:i_imerg+6+8]
             
-        Daily_Data_Date = ymd            
-        Daily_Date_List.append(Daily_Data_Date)
+            Daily_Data_Date = ymd            
+            Daily_Date_List.append(Daily_Data_Date)
     
     return sorted(Daily_Date_List)
 
@@ -158,11 +159,12 @@ def create_DD_List(_DD_folder):
     DD_Date_List=[]
     
     for DD_Data in os.listdir(_DD_folder):
-        print("found " + DD_Data + " in the DRY Days folder")
+        if DD_Data.endswith(".tif"):
+            print("found " + DD_Data + " in the DRY Days folder")
             
-        parse_String = DD_Data.split('_')
-        DD_Data_Date = parse_String[4]
-        DD_Date_List.append(DD_Data_Date)
+            parse_String = DD_Data.split('_')
+            DD_Data_Date = parse_String[4]
+            DD_Date_List.append(DD_Data_Date)
     
     return DD_Date_List
 
@@ -288,11 +290,12 @@ def create_WD_List(_WD_folder):
     WD_Date_List=[]
     
     for WD_Data in os.listdir(_WD_folder):
-        print("found " + WD_Data + " in the WET Days folder")
+        if WD_Data.endswith(".tif"):
+            print("found " + WD_Data + " in the WET Days folder")
             
-        parse_String = WD_Data.split('_')
-        WD_Data_Date = parse_String[4]
-        WD_Date_List.append(WD_Data_Date)
+            parse_String = WD_Data.split('_')
+            WD_Data_Date = parse_String[4]
+            WD_Date_List.append(WD_Data_Date)
     
     return WD_Date_List
 
@@ -418,11 +421,12 @@ def create_CDD_List(_CDD_folder):
     CDD_Date_List=[]
     
     for CDD_Data in os.listdir(_CDD_folder):
-        print("found " + CDD_Data + " in the Consecutive DRY Days folder")
+        if CDD_Data.endswith(".tif"):
+            print("found " + CDD_Data + " in the Consecutive DRY Days folder")
             
-        parse_String = CDD_Data.split('_')
-        CDD_Data_Date = parse_String[5]
-        CDD_Date_List.append(CDD_Data_Date)
+            parse_String = CDD_Data.split('_')
+            CDD_Data_Date = parse_String[5]
+            CDD_Date_List.append(CDD_Data_Date)
     
     return CDD_Date_List
 
@@ -548,11 +552,12 @@ def create_CWD_List(_CWD_folder):
     CWD_Date_List=[]
     
     for CWD_Data in os.listdir(_CWD_folder):
-        print("found " + CWD_Data + " in the Consecutive WET Days folder")
+        if CWD_Data.endswith(".tif"):
+            print("found " + CWD_Data + " in the Consecutive WET Days folder")
             
-        parse_String = CWD_Data.split('_')
-        CWD_Data_Date = parse_String[5]
-        CWD_Date_List.append(CWD_Data_Date)
+            parse_String = CWD_Data.split('_')
+            CWD_Data_Date = parse_String[5]
+            CWD_Date_List.append(CWD_Data_Date)
     
     return CWD_Date_List
 
