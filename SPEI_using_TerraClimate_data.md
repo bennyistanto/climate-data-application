@@ -17,7 +17,7 @@ This step-by-step guide was tested using Mac mini Server - Late 2012, 2.3 GHz Qu
 	* [3.3.A. Merge netCDFs into single netCDF and Clip data using a bounding box based on area of interest](#33a-merge-netcdfs-into-single-netcdf-and-clip-data-using-a-bounding-box-based-on-area-of-interest)
 	* [3.3.B. Clip data using a bounding box based on area of interest and Merge netCDFs into single netCDF](#33b-clip-data-using-a-bounding-box-based-on-area-of-interest-and-merge-netcdfs-into-single-netcdf)
 	* [3.4. Check variable and attribute](#34-check-variable-and-attribute)
-* [4. Calculate SPI](#4-calculate-spi)
+* [4. Calculate SPEI](#4-calculate-spei)
 * [5. Visualize the result using Panoply](#5-visualize-the-result-using-panoply)
 * [6. Convert the result to GeoTIFF](#6-convert-the-result-to-geotif)
 * [7. Global SPEI data](#7-global-spei-data)
@@ -89,7 +89,7 @@ If you are new to using Bash refer to the following lessons with Software Carpen
 
 #### Enable the Windows Subsytem for Linux
 
-If you are using Windows machine, it's recomended to follow below step. You will experience an error during SPI calculation cause by `NCO` if you use standard Windows 10 and not using Windows Subsytem for Linux. 
+If you are using Windows machine, it's recomended to follow below step. You will experience an error during SPEI calculation cause by `NCO` if you use standard Windows 10 and not using Windows Subsytem for Linux. 
 
 Guideline below are specific for Windows 10. If you are using Windows Server 2019, please follow [Windows Server Installation Guide](https://docs.microsoft.com/en-us/windows/wsl/install-on-server)
     
@@ -119,7 +119,7 @@ If you are new to using Bash refer to the following lessons with Software Carpen
 
 - Download and install [Anaconda Python](https://www.anaconda.com/products/individual) on your WSL Ubuntu Linux: [Ubuntu Linux on WSL](https://repo.anaconda.com/archive/Anaconda3-2020.11-Linux-x86_64.sh).
 
-	`climate-indices` python package used for SPI calculation is rely on [**netCDF Operator (NCO)**](http://nco.sourceforge.net) and pyNCO wrapper sometimes produce an error in Windows. That's the reason why we will use Anaconda for Linux if you are using Windows machine.
+	`climate-indices` python package used for SPEI calculation is rely on [**netCDF Operator (NCO)**](http://nco.sourceforge.net) and pyNCO wrapper sometimes produce an error in Windows. That's the reason why we will use Anaconda for Linux if you are using Windows machine.
 
 - Go to [https://repo.anaconda.com/archive/](https://repo.anaconda.com/archive/) to find the list of Anaconda releases
 
@@ -384,7 +384,7 @@ As explain in Step 3.1. Input requirement above, we need to check the variable a
 - As you can see from above picture, all the requirement is completed: unit is in `mm`, order dimension for each variables is `lat`, `lon`, `time`, and `time` dimension is in `UNLIMITED`. Once this has completed, the dataset can be used as input to `climate-indices` package for computing SPEI. 
 
 
-## 4. Calculate SPI
+## 4. Calculate SPEI
 
 Please make sure below points:
 

@@ -2,25 +2,37 @@
 
 Mapping the extent of a natural hazard (e.g., assessing areas with a high risk) or disaster is a first step in disaster risk management and emergency response. Subsequently, exposure mapping enables the estimation of the impact of hazards or disasters, for example, regarding the number of affected inhabitants or infrastructure. 
 
-This section describes in detail the methodology and analysis operations required for climate-based product data, to meet the user requirements of the GOST team of World Bank at country, regional and global level. 
+This section describes in detail the methodology and analysis operations required for climate-based product data, to meet the user requirements of the GOST team of the World Bank at country, regional and global level. 
 
 ## Index
 * [Climate Data](#climate-data)
 	* [TerraClimate](#terraclimate)
+		* [About the data](#about-the-data)
 		* [List datasets](#list-datasets)
-		* [About the data](#labout-the-data)
-		* [Downloads](#downloads)
+		* [Data access](#data-access)
+	* [CHELSA](#chelsa)
+		* [About the data](#about-the-data)
+		* [List datasets](#list-datasets)
+		* [Data access](#data-access)
+	* [MODIS](#modis)
+		* [MOD11A1](#mod11a1)
+			* [About the data](#about-the-data)
+			* [List datasets](#list-datasets)
+			* [Data access](#data-access)
 	* [GPM IMERG](#gpm-imerg)
+		* [About the data](#about-the-data)
 		* [List datasets](#list-datasets)
-		* [About the data](#labout-the-data)
-		* [Downloads](#downloads)
+		* [Data access](#data-access)
+	* [CHIRPS](#chirps)
+		* [About the data](#about-the-data)
+		* [Data access](#data-access)
 * [Climate Indices](#climate-indices)
 	* [Standardized Precipitation-Evapotranspiration Index (SPEI)](#standardized-precipitation-evapotranspiration-index-spei)
 		* [About the data](#labout-the-data)
 		* [Symbology](#symbology)
 	* [Consecutive Dry Days (CDD)](#consecutive-dry-days-cdd)
 		* [How it works](#lhow-it-works)
-		* [About the data](#labout-the-data)
+		* [About the data](#about-the-data)
 		* [Symbology](#symbology)
 * [How-to guides](#how-to-guides)
 
@@ -32,6 +44,18 @@ The climate are varies by location and by time of year. Daily and monthly rainfa
 ### TerraClimate
 
 [TerraClimate](http://www.climatologylab.org/terraclimate.html) is a dataset of monthly climate and climatic water balance for global terrestrial surfaces from 1958-2020. These data provide important inputs for ecological and hydrological studies at global scales that require high spatial resolution and time-varying data. All data have monthly temporal resolution and a 4-km (1/24th degree) spatial resolution. 
+
+#### About the data
+
+| Characteristic  | Description  |
+|---|---|
+| Function  | Displays monthly climate datasets  |
+| Variable  | Listed below  |
+| Geographic coverage  | Global 90N-90S, 180W-180E |
+| Spatial resolution  | 4-km at equator  |
+| Temporal resolution  | monthly  |
+| Format  | GeoTIFF  |
+| Unit  | See list below  |
 
 #### List datasets
 
@@ -56,23 +80,108 @@ The climate are varies by location and by time of year. Daily and monthly rainfa
 | `vpd`  | Vapor Pressure Deficit, average for month  | `kpa` |
 | `PDSI`  | Palmer Drought Severity Index, at end of month  | `unitless` |
 
+#### Data access
+
+Individual years download link: [http://thredds.northwestknowledge.net:8080/thredds/catalog/TERRACLIMATE_ALL/data/catalog.html](http://thredds.northwestknowledge.net:8080/thredds/catalog/TERRACLIMATE_ALL/data/catalog.html)
+
+Also available at DEC S3: `s3://wbgdecinternal-ntl/climate/data/terraclimate`
+
+
+### CHELSA
+
+[CHELSA](https://chelsa-climate.org) (Climatologies at high resolution for the earth’s land surface areas) is a very high resolution (`30 arcsec`, `~1km`) global downscaled climate data set currently hosted by the Swiss Federal Institute for Forest, Snow and Landscape Research WSL. It is built to provide free access to high resolution climate data for research and application, and is constantly updated and refined.
+
 #### About the data
 
 | Characteristic  | Description  |
 |---|---|
-| Function  | Displays monthly climate datasets  |
-| Variable  | Listed above  |
+| Function  | Displays daily climate datasets  |
+| Variable  | Listed below  |
 | Geographic coverage  | Global 90N-90S, 180W-180E |
-| Spatial resolution  | 4-km at equator  |
-| Temporal resolution  | monthly  |
-| Format  | GeoTIFF  |
-| Unit  | See list above  |
+| Spatial resolution  | 1-km at equator  |
+| Temporal resolution  | daily  |
+| Format  | netCDF  |
+| Unit  | See list below  |
 
-#### Downloads
+#### List datasets
 
-Individual years download link: [http://thredds.northwestknowledge.net:8080/thredds/catalog/TERRACLIMATE_ALL/data/catalog.html](http://thredds.northwestknowledge.net:8080/thredds/catalog/TERRACLIMATE_ALL/data/catalog.html)
+CHELSA provides `daily timeseries`, `monthly timeseries`,  `Bioclimate/Köppen-Geiger`, `Future` and `Paleo Climate` data. To support current project, GOST utilise daily timeseries temperature data from CHELSA-W5E5.
 
-Also available at JNB Server Public Directory: J:\Data\GLOBAL\CLIMATE\TerraClimate
+**CHELSA-W5E5 v1.0**
+
+[CHELSA-W5E5](https://chelsa-climate.org/chelsa-w5e5-v1-0-daily-climate-data-at-1km-resolution/) dataset covers the entire globe at `30 arcsec` horizontal and daily temporal resolution from 1979 to 2016. Variables (with short names and units in brackets) included in the CHELSA-W5E5 dataset are:
+
+| Name  | Description  | Units |
+|---|---|---|
+| `pr`  | Daily Mean Precipitation  | `kg m-2 s-1` |
+| `rsds`  | Daily Mean Surface Downwelling Shortwave Radiation  | `W m-2` |
+| `tas`  | Daily Mean Near-Surface Air Temperature  | `K` |
+| `tasmin`  | Daily Minimum Near Surface Air Temperature  | `K` |
+| `tasmax`  | Daily Maximum Near Surface Air Temperature  | `K` |
+| `orog`  | Surface Altitude  | `m` |
+| `mask`  | the CHELSA-W5E5 land-sea mask  | `1` |
+
+#### Data access
+
+Individual monthly download link: [https://data.isimip.org/10.48364/ISIMIP.836809](https://data.isimip.org/10.48364/ISIMIP.836809)
+
+Daily min and max temperature also available at DEC S3: `s3://wbgdecinternal-ntl/climate/data/chelsa`
+
+
+### MODIS
+
+[MODIS](https://modis.gsfc.nasa.gov/about/) (or Moderate Resolution Imaging Spectroradiometer) is a key instrument aboard the [Terra](http://terra.nasa.gov/) (originally known as EOS AM-1) and [Aqua](http://aqua.nasa.gov/) (originally known as EOS PM-1) satellites. Terra MODIS and Aqua MODIS are viewing the entire Earth's surface every 1 to 2 days, acquiring data in 36 spectral bands, or groups of wavelengths (see MODIS Technical Specifications). These data will improve our understanding of global dynamics and processes occurring on the land, in the oceans, and in the lower atmosphere.
+
+There are so many MODIS products, complete list ara available here [https://modis.gsfc.nasa.gov/data/dataprod/](https://modis.gsfc.nasa.gov/data/dataprod/)
+
+#### MOD11A1
+
+The MOD11A1 V6 product provides daily land surface temperature (LST) and emissivity values in a 1200 x 1200 kilometer grid. The temperature value is derived from the MOD11_L2 swath product. Above 30 degrees latitude, some pixels may have multiple observations where the criteria for clear-sky are met. When this occurs, the pixel value is the average of all qualifying observations. Provided along with both the day-time and night-time surface temperature bands and their quality indicator layers are MODIS bands 31 and 32 and six observation layers. 
+
+##### About the data
+
+| Characteristic  | Description  |
+|---|---|
+| Function  | Displays daily day and nighttime LST  |
+| Variable  | Listed below  |
+| Geographic coverage  | Global 90N-90S, 180W-180E |
+| Spatial resolution  | 1-km at equator  |
+| Temporal resolution  | daily  |
+| Original format  | HDF-EOS  |
+| Unit  | See list below  |
+
+##### List datasets
+
+We are utilising Google Earth Engine ([GEE](https://earthengine.google.com)) to get [MOD11A1](https://developers.google.com/earth-engine/datasets/catalog/MODIS_006_MOD11A1#bands) data, and below are list of MOD11A1 bands that available at GEE.
+
+| Name  | Description  | Units | Scale |
+|---|---|---|---|
+| `LST_Day_1km`  | Daytime Land Surface Temperature  | `Kelvin` | `0.02` |
+| `QC_Day`  | Daytime LST Quality Indicators  |  |  |
+| `Day_view_time`  | Local time of day observation  | `Hours` | `0.1` |
+| `Day_view_angle`  | View zenith angle of day observation  | `Degrees` |  |
+| `LST_Night_1km`  | Nighttime Land Surface Temperature  | `Kelvin` | `0.02` |
+| `QC_Night`  | Nighttime LST Quality Indicators  |  |  |
+| `Night_view_time`  | Local time of night observation  | `Hours` | `0.1` |
+| `Night_view_angle`  | View zenith angle of night observation  | `Degrees` |  |
+| `Emis_31`  | Band 31 emissivity  |  | `0.002` |
+| `Emis_32`  | Band 32 emissivity  |  | `0.002` |
+| `Clear_day_cov`  | Day clear-sky coverage  |  | `0.0005` |
+| `Clear_night_cov`  | Night clear-sky coverage  |  | `0.0005` |
+
+We wrote a GEE [code](https://code.earthengine.google.com/c8733dbad095ad6e5b259142e9d882e7) to get some variables that required by the team for different purposes. Currently we have data covering Indonesia and Latin America Countries, and the variables are listed below:
+
+| Variables  | Units |
+|---|---|
+| Annual 24h mean LST  | `degC` |
+| Annual daytime mean LST  | degC |
+| Number of annual hotdays based on 24h mean daily LST  | `days` |
+| Number of annual hotdays based on daytime daily LST  | `days` |
+
+##### Data access
+
+Annual temperature and hotdays also available at DEC S3: `s3://wbgdecinternal-ntl/climate/data/modis/mod11a1/annual`
+
 
 
 ### GPM IMERG
@@ -117,9 +226,35 @@ Near-real time
 | Unit  | Total mm for given time step, mm/hour, mm/day, and mm/month.  |
 | Reference  | https://pmm.gsfc.nasa.gov/GPM  |
 
-#### Downloads
+#### Data access
 
-IMERG daily data available at JNB Server Public Directory: J:\Data\GLOBAL\CLIMATE\IMERG
+IMERG daily data available at DEC S3: `s3://wbgdecinternal-ntl/climate/data/imerg`
+
+
+
+### CHIRPS
+
+Climate Hazards Group InfraRed Precipitation with Station data (CHIRPS) from Climate Hazard Center (CHC), Department of Geography, University of California Santa Barbara - https://www.chc.ucsb.edu/data/chirps is a 35+ year quasi-global rainfall data set. Spanning 50°S-50°N (and all longitudes) and ranging from 1981 to near-present, CHIRPS incorporates CHC's in-house climatology, CHPclim, 0.05° resolution satellite imagery, and in-situ station data to create gridded rainfall time series for trend analysis and seasonal drought monitoring. 
+
+#### About the data
+
+| Characteristic  | Description  |
+|---|---|
+| Function  | Displays daily, pentad, dekad, monthly, 2-monthly, 3-monthly and annual rainfall data  |
+| Variable  | Total rainfall  |
+| Geographic coverage  | Global 50N-50S, 180W-180E |
+| Spatial resolution  | 0.05 degree ~ 5.6 km at equator  |
+| Temporal resolution  | daily, pentad, dekad, monthly, 2-monthly, 3-monthly and annual  |
+| Format  | GeoTIFF, BIL and NetCDF  |
+| Unit  | Total mm for given time step, mm/pentad, mm/month, etc.  |
+| Reference  | https://wiki.chc.ucsb.edu/CHIRPS_FAQ  |
+
+#### Data access
+
+Official download link from CHIRPS available from: [https://data.chc.ucsb.edu/products/CHIRPS-2.0/](https://data.chc.ucsb.edu/products/CHIRPS-2.0/)
+
+CHIRPS monthly data available at DEC S3: `s3://wbgdecinternal-ntl/climate/data/chirps`
+
 
 
 ## Climate Indices
@@ -138,7 +273,7 @@ The idea behind the SPEI is to compare the highest possible evapotranspiration (
 
 Negative SPI values represent rainfall deficit and less than median precipitation, and high potential epotranspiration (Dry), starts when the SPEI value is equal or below -1.0. Whereas positive SPEI values indicate rainfall surplus and greater than median precipitation, and low potential epotranspiration (Wet), starts when the SPEI value is equal or above 1.0, and ends when the value becomes negative.
 
-SPEI derived from TerraClimate data
+SPEI derived from [TerraClimate](#terraclimate) data
 
 #### About the data
 
@@ -169,6 +304,10 @@ The threshold and the symbology for the SPEI can follow below color codes and im
 | Very Moist  | +1.20 to +1.50  | `#008180` ![#008180](https://via.placeholder.com/15/008180/000000?text=+)  | rgb(0, 129, 128)  |
 | Extremely Moist  | +1.50 to +2.00  | `#2a23eb` ![#2a23eb](https://via.placeholder.com/15/2a23eb/000000?text=+)  | rgb(42, 35, 235)  |
 | Exceptionally Moist  | +2.00 and above  | `#a21fec` ![#a21fec](https://via.placeholder.com/15/a21fec/000000?text=+)  | rgb(162, 31, 236)  |
+
+#### Data access
+
+Global SPEI data available at DEC S3: `s3://wbgdecinternal-ntl/climate/products/spei-terraclimate`
 
 
 ### Consecutive Dry Days (CDD)
