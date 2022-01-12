@@ -307,7 +307,7 @@ The threshold and the symbology for the SPEI can follow below color codes and im
 
 #### Data access
 
-Global SPEI data available at DEC S3: `s3://wbgdecinternal-ntl/climate/products/spei-terraclimate`
+Global SPEI-12 data available at DEC S3: `s3://wbgdecinternal-ntl/climate/products/spei-terraclimate`
 
 
 ### Consecutive Dry Days (CDD)
@@ -333,7 +333,7 @@ CDD derived from IMERG data
 |---|---|
 | Function  | Displays daily CDD  |
 | Variable  | CDD  |
-| Geographic coverage  | Indonesia 7N-12S, 94E-142E |
+| Geographic coverage  | Global 60N-60S, 180W-180E |
 | Spatial resolution  | 0.1 degree ~ 11.1 km at equator  |
 | Temporal resolution  | Daily  |
 | Format  | GeoTIFF  |
@@ -353,6 +353,9 @@ The threshold and the symbology for the CDD can follow below color codes and ima
 | Very Long  | 31 - 60  | `#de2c26` ![#de2c26](https://via.placeholder.com/15/de2c26/000000?text=+)  | rgb(222, 44, 38)  |
 | Extreme Drought  | +60  | `#a60f14` ![#a60f14](https://via.placeholder.com/15/a60f14/000000?text=+)  | rgb(166, 15, 20)  |
 
+#### Data access
+
+Global CDD data available at DEC S3: `s3://wbgdecinternal-ntl/climate/products/cdd-imerg`
 
 # How-to guides
 
