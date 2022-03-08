@@ -1,0 +1,107 @@
+site_name: GOST Climate
+site_description: GOST climate data and application repository
+site_url: "https://bennyistanto.github.io/climate-data-application"
+repo_url: https://github.com/bennyistanto/climate-data-application
+repo_name: bennyistanto/climate-data-application
+
+
+theme:
+  name: material
+  palette:
+    - media: "(prefers-color-scheme: light)"
+      scheme: default
+      primary: white
+      accent: indigo
+      toggle:
+        icon: material/toggle-switch-off-outline
+        name: Switch to dark mode
+    - media: "(prefers-color-scheme: dark)"
+      scheme: slate
+      primary: orange
+      accent: orange
+      toggle:
+        icon: material/toggle-switch
+        name: Switch to light mode
+  icon:
+    repo: fontawesome/brands/github
+    logo: material/library
+    favicon: assets/images/favicon.png
+  font:
+    text: Roboto
+    code: Roboto Mono
+  features:
+    - navigation.sections
+    - navigation.expand
+    - navigation.top
+
+plugins:
+  - search:
+      separator: '[\s\-\.]+'
+
+extra_javascript:
+  - javascripts/mathjax.js
+  - https://polyfill.io/v3/polyfill.min.js?features=es6
+  - https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js
+
+extra:
+  analytics:
+    provider: google
+    property: 
+
+markdown_extensions:
+  - pymdownx.arithmatex:
+      generic: true
+  - pymdownx.critic
+  - pymdownx.betterem:
+      smart_enable: all
+  - pymdownx.caret
+  - pymdownx.mark
+  - pymdownx.tilde
+  - footnotes
+  - admonition
+  - pymdownx.tabbed
+  - pymdownx.keys
+  - pymdownx.highlight:
+      use_pygments: true
+      linenums: false
+      linenums_style: pymdownx-inline
+  - pymdownx.inlinehilite
+  - pymdownx.keys
+  - pymdownx.superfences
+  - pymdownx.snippets
+  - pymdownx.details
+  - pymdownx.emoji:
+      emoji_index: !!python/name:materialx.emoji.twemoji
+      emoji_generator: !!python/name:materialx.emoji.to_svg
+  - pymdownx.tasklist:
+      clickable_checkbox: false
+      custom_checkbox: true
+  - def_list
+
+
+nav:
+    - About: index.md
+    - Data: 
+        - CHELSA: chelsa.md
+        - CHIRPS: chirps.md
+        - IMERG: imerg.md
+        - MODIS: modis.md
+        - TerraClimate: terraclimate.md
+    - Climate Indices: 
+        - Consecutive Dry Days: cdd.md
+        - Consecutive Wet Days: cwd.md
+        - Dry Days: dry.md
+        - Wet Days: wet.md
+        - Standardized Precipitation Index: spi.md
+        - Standardized Precipitation Evapotranspiration Index: spei.md
+    - How-to?: 
+        - Prerequisite: 
+            - Introduction: introduction.md
+            - Software Requirement: software-requirement.md
+            - Python Environment: python-env.md
+        - Topic:
+            - Standardized Precipitation Evapotranspiration Index: spei-terraclimate.md
+    - Case: 
+        - Climate Change, Urban and Sustainability: sdflagship.md
+        - Drought intensity in São Tomé and Príncipe: stp.md
+        - Monitoring wet season in South Sudan: ssd.md

@@ -1,0 +1,1371 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="GOST climate data and application repository">
+      
+      
+      
+        <link rel="canonical" href="https://bennyistanto.github.io/climate-data-application/spei-terraclimate/">
+      
+      <link rel="icon" href="../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.2.3, mkdocs-material-8.1.7">
+    
+    
+      
+        <title>Standardized Precipitation Evapotranspiration Index - GOST Climate</title>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/stylesheets/main.cd566b2a.min.css">
+      
+        
+        <link rel="stylesheet" href="../assets/stylesheets/palette.e6a45f82.min.css">
+        
+      
+    
+    
+    
+      
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,700%7CRoboto+Mono&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("..",location),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+  
+
+
+  
+  
+
+
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="white" data-md-color-accent="indigo">
+  
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&"object"==typeof palette.color)for(var key of Object.keys(palette.color))document.body.setAttribute("data-md-color-"+key,palette.color[key])</script>
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#spei-using-terraclimate-data" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href=".." title="GOST Climate" class="md-header__button md-logo" aria-label="GOST Climate" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54z"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            GOST Climate
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Standardized Precipitation Evapotranspiration Index
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      <form class="md-header__option" data-md-component="palette">
+        
+          
+          
+          <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="default" data-md-color-primary="white" data-md-color-accent="indigo"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_1">
+          
+            <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_2" hidden>
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M17 6H7c-3.31 0-6 2.69-6 6s2.69 6 6 6h10c3.31 0 6-2.69 6-6s-2.69-6-6-6zm0 10H7c-2.21 0-4-1.79-4-4s1.79-4 4-4h10c2.21 0 4 1.79 4 4s-1.79 4-4 4zM7 9c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3z"/></svg>
+            </label>
+          
+        
+          
+          
+          <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="slate" data-md-color-primary="orange" data-md-color-accent="orange"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_2">
+          
+            <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_1" hidden>
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M17 7H7a5 5 0 0 0-5 5 5 5 0 0 0 5 5h10a5 5 0 0 0 5-5 5 5 0 0 0-5-5m0 8a3 3 0 0 1-3-3 3 3 0 0 1 3-3 3 3 0 0 1 3 3 3 3 0 0 1-3 3z"/></svg>
+            </label>
+          
+        
+      </form>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" aria-label="Clear" tabindex="-1">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/bennyistanto/climate-data-application/" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512"><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    bennyistanto/climate-data-application
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href=".." title="GOST Climate" class="md-nav__button md-logo" aria-label="GOST Climate" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54z"/></svg>
+
+    </a>
+    GOST Climate
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/bennyistanto/climate-data-application/" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512"><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    bennyistanto/climate-data-application
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href=".." class="md-nav__link">
+        About
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+      
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_2" data-md-state="indeterminate" type="checkbox" id="__nav_2" checked>
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_2">
+          Data
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Data" data-md-level="1">
+        <label class="md-nav__title" for="__nav_2">
+          <span class="md-nav__icon md-icon"></span>
+          Data
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../chelsa/" class="md-nav__link">
+        CHELSA
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../chirps/" class="md-nav__link">
+        CHIRPS
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../imerg/" class="md-nav__link">
+        IMERG
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../modis/" class="md-nav__link">
+        MODIS
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../terraclimate/" class="md-nav__link">
+        TerraClimate
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+      
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_3" data-md-state="indeterminate" type="checkbox" id="__nav_3" checked>
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_3">
+          Climate Indices
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Climate Indices" data-md-level="1">
+        <label class="md-nav__title" for="__nav_3">
+          <span class="md-nav__icon md-icon"></span>
+          Climate Indices
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../cdd/" class="md-nav__link">
+        Consecutive Dry Days
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../cwd/" class="md-nav__link">
+        Consecutive Wet Days
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../dry/" class="md-nav__link">
+        Dry Days
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../wet/" class="md-nav__link">
+        Wet Days
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../spi/" class="md-nav__link">
+        Standardized Precipitation Index
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../spei/" class="md-nav__link">
+        Standardized Precipitation Evapotranspiration Index
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+    
+  
+  
+    
+      
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_4" type="checkbox" id="__nav_4" checked>
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_4">
+          How-to?
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="How-to?" data-md-level="1">
+        <label class="md-nav__title" for="__nav_4">
+          <span class="md-nav__icon md-icon"></span>
+          How-to?
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_4_1" data-md-state="indeterminate" type="checkbox" id="__nav_4_1" checked>
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_4_1">
+          Prequisite
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Prequisite" data-md-level="2">
+        <label class="md-nav__title" for="__nav_4_1">
+          <span class="md-nav__icon md-icon"></span>
+          Prequisite
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../introduction/" class="md-nav__link">
+        Introduction
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../software-requirement/" class="md-nav__link">
+        Software Requirement
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../python-env/" class="md-nav__link">
+        Python Environment
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+    
+  
+  
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_4_2" type="checkbox" id="__nav_4_2" checked>
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_4_2">
+          Theme
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Theme" data-md-level="2">
+        <label class="md-nav__title" for="__nav_4_2">
+          <span class="md-nav__icon md-icon"></span>
+          Theme
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+    
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          Standardized Precipitation Evapotranspiration Index
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        Standardized Precipitation Evapotranspiration Index
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#0-working-directory" class="md-nav__link">
+    0. Working Directory
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#1-preparing-input" class="md-nav__link">
+    1. Preparing input
+  </a>
+  
+    <nav class="md-nav" aria-label="1. Preparing input">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#11-input-requirement" class="md-nav__link">
+    1.1. Input requirement
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#12-download-terraclimate-data" class="md-nav__link">
+    1.2. Download TerraClimate data
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#13-clip-data-using-a-bounding-box-based-on-area-of-interest-and-merge-netcdfs-into-single-netcdf" class="md-nav__link">
+    1.3. Clip data using a bounding box based on area of interest and merge netCDFs into single netCDF
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#14-check-variable-and-attribute" class="md-nav__link">
+    1.4. Check variable and attribute
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-calculate-spei" class="md-nav__link">
+    2. Calculate SPEI
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-visualize-the-result-using-panoply" class="md-nav__link">
+    3. Visualize the result using Panoply
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4-convert-the-result-to-geotiff" class="md-nav__link">
+    4. Convert the result to GeoTIFF
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#5-global-spei-data" class="md-nav__link">
+    5. Global SPEI data
+  </a>
+  
+    <nav class="md-nav" aria-label="5. Global SPEI data">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#51-example-output" class="md-nav__link">
+    5.1. Example output
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#52-comparison-with-other-data-provider" class="md-nav__link">
+    5.2. Comparison with other data provider
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#6-reference" class="md-nav__link">
+    6. Reference
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+      
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_5" data-md-state="indeterminate" type="checkbox" id="__nav_5" checked>
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_5">
+          Application
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Application" data-md-level="1">
+        <label class="md-nav__title" for="__nav_5">
+          <span class="md-nav__icon md-icon"></span>
+          Application
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../sdflagship/" class="md-nav__link">
+        Climate Change, Urban and Sustainability
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../stp/" class="md-nav__link">
+        Drought intensity in São Tomé and Príncipe
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ssd/" class="md-nav__link">
+        Monitoring wet season in South Sudan
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#0-working-directory" class="md-nav__link">
+    0. Working Directory
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#1-preparing-input" class="md-nav__link">
+    1. Preparing input
+  </a>
+  
+    <nav class="md-nav" aria-label="1. Preparing input">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#11-input-requirement" class="md-nav__link">
+    1.1. Input requirement
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#12-download-terraclimate-data" class="md-nav__link">
+    1.2. Download TerraClimate data
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#13-clip-data-using-a-bounding-box-based-on-area-of-interest-and-merge-netcdfs-into-single-netcdf" class="md-nav__link">
+    1.3. Clip data using a bounding box based on area of interest and merge netCDFs into single netCDF
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#14-check-variable-and-attribute" class="md-nav__link">
+    1.4. Check variable and attribute
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-calculate-spei" class="md-nav__link">
+    2. Calculate SPEI
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-visualize-the-result-using-panoply" class="md-nav__link">
+    3. Visualize the result using Panoply
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4-convert-the-result-to-geotiff" class="md-nav__link">
+    4. Convert the result to GeoTIFF
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#5-global-spei-data" class="md-nav__link">
+    5. Global SPEI data
+  </a>
+  
+    <nav class="md-nav" aria-label="5. Global SPEI data">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#51-example-output" class="md-nav__link">
+    5.1. Example output
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#52-comparison-with-other-data-provider" class="md-nav__link">
+    5.2. Comparison with other data provider
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#6-reference" class="md-nav__link">
+    6. Reference
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          <div class="md-content" data-md-component="content">
+            <article class="md-content__inner md-typeset">
+              
+                
+<a href="https://github.com/bennyistanto/climate-data-application/edit/master/docs/spei-terraclimate.md" title="Edit this page" class="md-content__button md-icon">
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20.71 7.04c.39-.39.39-1.04 0-1.41l-2.34-2.34c-.37-.39-1.02-.39-1.41 0l-1.84 1.83 3.75 3.75M3 17.25V21h3.75L17.81 9.93l-3.75-3.75L3 17.25z"/></svg>
+</a>
+
+
+<h1 id="spei-using-terraclimate-data">SPEI using TerraClimate data</h1>
+<p>This section will explain on how to download TerraClimate's precipitation (ppt) and potential evapotranspiration (pet) monthly data in netCDF format and prepare it as input for SPEI calculation.</p>
+<p>This step-by-step guide was tested using Mac mini Server - Late 2012, 2.3 GHz Quad-Core Intel Core i7, 16 GB 1600 MHz DDR3, running on macOS Catalina 10.15.7 and Windows 10 with Windows Subsystem for Linux enabled running on Parallels Desktop.</p>
+<h2 id="0-working-directory">0. Working Directory</h2>
+<p>For this tutorial, we are working on these folder <code>/Users/gost/temp/terraclimate/spei/</code> (applied to Mac/Linux machine) or <code>Z:/temp/terraclimate/spei/</code> (applied to Windows machine) directory. I have some folder inside this directory:</p>
+<ol>
+<li>
+<p><code>downloads</code></p>
+<ol>
+<li><code>ppt</code><ol>
+<li><code>nc_original</code></li>
+<li><code>nc_merge</code></li>
+<li><code>nc_tiles</code></li>
+<li><code>nc_subset</code></li>
+<li><code>nc_llt</code> Place to put netCDF's ppt data that will use as an input</li>
+</ol>
+</li>
+<li><code>pet</code><ol>
+<li><code>nc_original</code></li>
+<li><code>nc_merge</code></li>
+<li><code>nc_tiles</code></li>
+<li><code>nc_subset</code></li>
+<li><code>nc_llt</code> Place to put netCDF's pet data that will use as an input</li>
+</ol>
+</li>
+</ol>
+<p>Place to put downloaded TerraCLimate data, and pre-process temporary files.</p>
+</li>
+<li>
+<p><code>output</code> </p>
+<ol>
+<li><code>nc_original</code> Output folder for SPEI calculation<ol>
+<li><code>gamma</code></li>
+<li><code>pearson</code></li>
+</ol>
+</li>
+<li><code>nc_tll</code> Temporary for nc files from NCO arrange dimension process</li>
+<li><code>nc_merge</code> Merging nc from separate tiles into single global layer (if you are following the global analysis procedures)</li>
+<li><code>geotiff</code><ol>
+<li><code>gamma</code> Final output of SPEI, generate by CDO and GDAL</li>
+</ol>
+</li>
+</ol>
+</li>
+</ol>
+<p>Feel free to use your own preferences for this setting/folder arrangements.</p>
+<h2 id="1-preparing-input">1. Preparing input</h2>
+<p>SPEI requires monthly precipitation and potential evapotranspiration data, for better result, SPEI required minimum 30-years of data.</p>
+<p>If you are prefer to use your own dataset also fine, you can still follow this guideline and adjust some steps and code related to filename, unit, format and structure.</p>
+<h3 id="11-input-requirement">1.1. Input requirement</h3>
+<p>The <a href="https://pypi.org/project/climate-indices/">climate-indices</a> python package enables the user to calculate SPEI using any gridded netCDF dataset. However, there are certain requirements for input files that vary based on input type.</p>
+<ul>
+<li>
+<p>Precipitation and potential evapotranspiration unit must be written as <code>millimeters</code>, <code>millimeter</code>, <code>mm</code>, <code>inches</code>, <code>inch</code> or <code>in</code>.</p>
+</li>
+<li>
+<p>Data dimension and order must be written as <code>lat</code>, <code>lon</code>, <code>time</code> (Windows machine required this order) or <code>time</code>, <code>lat</code>, <code>lon</code> (Works tested on Mac/Linux and Linux running on WSL). </p>
+</li>
+<li>
+<p>If your study area are big, it's better to prepare all the data following this dimension order: <code>lat</code>, <code>lon</code>, <code>time</code> as all the data will force following this order during SPEI calculation by NCO module. Let say you only prepare the data as is (leaving the order to <code>lat</code>, <code>lon</code>, <code>time</code>), it also acceptable but it will required lot of memory to use re-ordering the dimension, and usually NCO couldn't handle all the process and failed.</p>
+</li>
+</ul>
+<h3 id="12-download-terraclimate-data">1.2. Download TerraClimate data</h3>
+<ul>
+<li>
+<p>There are 2 files contains link for downloading <code>ppt</code> (<a href="https://github.com/worldbank/GOST_Climate/blob/main/downloads/ppt/nc_original/data_ppt.sh">https://github.com/worldbank/GOST_Climate/blob/main/downloads/ppt/nc_original/data_ppt.sh</a> and <code>pet</code> (<a href="https://github.com/worldbank/GOST_Climate/blob/main/downloads/pet/nc_original/data_pet.sh">https://github.com/worldbank/GOST_Climate/blob/main/downloads/pet/nc_original/data_pet.sh</a>), the folder location are exactly the same with the working directory above. </p>
+</li>
+<li>
+<p>Download both files and put it in the same location with your working directory.</p>
+</li>
+<li>
+<p>Navigate to <code>downloads/terraclimate/ppt/nc_original</code> and <code>downloads/terraclimate/pet/nc_original</code>folder in the working directory. Download using <code>wget</code> all TerraClimate in netCDF format from Jan 1958 to Dec 2020 (this is lot of data, <code>ppt</code> +- 7.7GB and <code>pet</code> +- 6.4GB, please make sure you have bandwidth and unlimited data package). Paste and Enter below script in your Terminal.</p>
+<p>If you are in <code>downloads/terraclimate/ppt/nc_original</code> then execute below command</p>
+<p><div class="highlight"><pre><span></span><code>sh data_ppt.sh
+</code></pre></div>
+If you are in <code>downloads/terraclimate/pet/nc_original</code> then execute below command</p>
+<div class="highlight"><pre><span></span><code>sh data_pet.sh
+</code></pre></div>
+</li>
+</ul>
+<blockquote>
+<p><strong><em>NOTE:</em></strong><br />
+This guideline provide example on how to use CDO and NCO to do some data extraction process,
+you can choose which one is suits you.</p>
+</blockquote>
+<h3 id="13-clip-data-using-a-bounding-box-based-on-area-of-interest-and-merge-netcdfs-into-single-netcdf">1.3. Clip data using a bounding box based on area of interest and merge netCDFs into single netCDF</h3>
+<ul>
+<li>
+<p>Clip your area of interest using bounding box. We will use Sao Tome and Principe (STP) as the example case.</p>
+<p>Example: (STP) bounding box with format <code>lon1</code>,<code>lon2</code>,<code>lat1</code>,<code>lat2</code> is <code>5.75</code>,<code>8.05</code>,<code>-0.35</code>,<code>2.15</code></p>
+<p>Precipitation: Navigate your location to <code>/downloads/ppt/nc_original</code></p>
+<p>CDO script:</p>
+<div class="highlight"><pre><span></span><code><span class="k">for</span> fl <span class="k">in</span> *.nc<span class="p">;</span> cdo sellonlatbox,5.75,8.05,-0.35,2.15 <span class="nv">$fl</span> ../nc_subset/<span class="s2">&quot;stp_cli_&quot;</span><span class="nv">$fl</span><span class="p">;</span> <span class="k">done</span>
+</code></pre></div>
+<p>NCO script:</p>
+<div class="highlight"><pre><span></span><code><span class="k">for</span> fl <span class="k">in</span> *.nc<span class="p">;</span> ncks -d latitude,-0.35,2.15 -d longitude,5.75,8.05 <span class="nv">$fl</span> -O ../nc_subset/<span class="s2">&quot;stp_cli_&quot;</span><span class="nv">$fl</span><span class="p">;</span> <span class="k">done</span>
+</code></pre></div>
+<p>Potential Evapotranspiration: Navigate your location to <code>/downloads/pet/nc_original</code></p>
+<p>CDO script:</p>
+<div class="highlight"><pre><span></span><code><span class="k">for</span> fl <span class="k">in</span> *.nc<span class="p">;</span> cdo sellonlatbox,5.75,8.05,-0.35,2.15 <span class="nv">$fl</span> ../nc_subset/<span class="s2">&quot;stp_cli_&quot;</span><span class="nv">$fl</span><span class="p">;</span> <span class="k">done</span>
+</code></pre></div>
+<p>NCO script:</p>
+<div class="highlight"><pre><span></span><code><span class="k">for</span> fl <span class="k">in</span> *.nc<span class="p">;</span> ncks -d latitude,-0.35,2.15 -d longitude,5.75,8.05 <span class="nv">$fl</span> -O ../nc_subset/<span class="s2">&quot;stp_cli_&quot;</span><span class="nv">$fl</span><span class="p">;</span> <span class="k">done</span>
+</code></pre></div>
+</li>
+<li>
+<p>Merge all annual netcdf in a folder into single netcdf.</p>
+<p>Precipitation: make sure you are in <code>/downloads/ppt/nc_subset</code></p>
+<p>CDO script:</p>
+<div class="highlight"><pre><span></span><code>cdo mergetime stp_*.nc ../nc_merge/stp_cli_terraclimate_ppt_1958_2020.nc
+</code></pre></div>
+<p>NCO script:
+Before merging the data, NCO required all the data has <code>time</code>dimension, we will use <code>ncks</code> command to make <code>time</code> the record dimension/variable used for concatenating files.</p>
+<div class="highlight"><pre><span></span><code><span class="k">for</span> fl <span class="k">in</span> *.nc<span class="p">;</span> <span class="k">do</span> ncks -O --mk_rec_dmn <span class="nb">time</span> <span class="nv">$fl</span> <span class="nv">$fl</span><span class="p">;</span> <span class="k">done</span>
+</code></pre></div>
+<p>Then we are ready to concatenate it.</p>
+<div class="highlight"><pre><span></span><code>ncrcat -O -h stp_*.nc ../nc_merge/stp_cli_terraclimate_ppt_1958_2020.nc
+</code></pre></div>
+<p>Potential Evapotranspiration: make sure you are in <code>/downloads/pet/nc_subset</code></p>
+<p>CDO script:</p>
+<div class="highlight"><pre><span></span><code>cdo mergetime stp_*.nc ../nc_merge/stp_cli_terraclimate_pet_1958_2020.nc
+</code></pre></div>
+<p>NCO script:
+Before merging the data, NCO required all the data has <code>time</code>dimension, we will use <code>ncks</code> command to make <code>time</code> the record dimension/variable used for concatenating files.</p>
+<div class="highlight"><pre><span></span><code><span class="k">for</span> fl <span class="k">in</span> *.nc<span class="p">;</span> <span class="k">do</span> ncks -O --mk_rec_dmn <span class="nb">time</span> <span class="nv">$fl</span> <span class="nv">$fl</span><span class="p">;</span> <span class="k">done</span>
+</code></pre></div>
+<p>Then we are ready to concatenate it.</p>
+<div class="highlight"><pre><span></span><code>ncrcat -O -h stp_*.nc ../nc_merge/stp_cli_terraclimate_pet_1958_2020.nc
+</code></pre></div>
+</li>
+</ul>
+<h3 id="14-check-variable-and-attribute">1.4. Check variable and attribute</h3>
+<p>As explain in Step 1.1. Input requirement above, we need to check the variable and attribute on above result to make sure all meet the requirements. </p>
+<ul>
+<li>
+<p>Navigate to <code>/downloads/ppt/nc_merge</code> folder in the working directory. Then execute below command.</p>
+<div class="highlight"><pre><span></span><code>ncdump -h stp_cli_terraclimate_ppt_1958_2020.nc
+</code></pre></div>
+<p><img alt="ncdump ppt" src="../img/ncdump-ppt.png" /></p>
+</li>
+<li>
+<p>Navigate to <code>/downloads/pet/nc_merge</code> folder in the working directory. Then execute below command.</p>
+<div class="highlight"><pre><span></span><code>ncdump -h stp_cli_terraclimate_pet_1958_2020.nc
+</code></pre></div>
+<p><img alt="ncdump pet" src="../img/ncdump-pet.png" /></p>
+</li>
+<li>
+<p>As you can see from above picture, all the requirement is completed: unit is in <code>mm</code>, order dimension for each variables is <code>lat</code>, <code>lon</code>, <code>time</code>, and <code>time</code> dimension is in <code>UNLIMITED</code>. Once this has completed, the dataset can be used as input to <code>climate-indices</code> package for computing SPEI. </p>
+</li>
+</ul>
+<h2 id="2-calculate-spei">2. Calculate SPEI</h2>
+<p>Please make sure below points:</p>
+<ul class="task-list">
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled checked/><span class="task-list-indicator"></span></label> You are still inside <code>climate_indices</code> environment to start working on SPEI calculation. </li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled checked/><span class="task-list-indicator"></span></label> Variable name on precipitation <code>--var_name_precip</code>, usually TerraClimate data use <code>ppt</code> as name while other precipitation data like CHIRPS using <code>precip</code> and IMERG using <code>precipitation</code> as a variable name. To make sure, check using command <code>ncdump -h file.nc</code> then adjust it in SPEI script if needed.</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled checked/><span class="task-list-indicator"></span></label> Variable name on potential evapotranspiration <code>--var_name_pet</code>, usually TerraClimate data use <code>pet</code> as name.</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled checked/><span class="task-list-indicator"></span></label> Precipitation and potential evapotranspiration unit must be written as <code>millimeters</code>, <code>milimeter</code>, <code>mm</code>, <code>inches</code>, <code>inch</code> or <code>in</code>.</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled checked/><span class="task-list-indicator"></span></label> Data dimension and order must be written as <code>lat</code>, <code>lon</code>, <code>time</code> (Windows machine required this order) or <code>time</code>, <code>lat</code>, <code>lon</code> (Works tested on Mac/Linux and Linux running on WSL).</li>
+</ul>
+<p>Let's start the calculation!</p>
+<ul>
+<li>
+<p>In your Terminal, run the following code.</p>
+<div class="highlight"><pre><span></span><code>process_climate_indices --index spei --periodicity monthly --netcdf_precip /Users/gost/temp/terraclimate/spei/downloads/ppt/nc_merge/stp_cli_terraclimate_ppt_1958_2020.nc --var_name_precip ppt --netcdf_pet /Users/gost/temp/terraclimate/spei/downloads/pet/nc_merge/stp_cli_terraclimate_pet_1958_2020.nc --var_name_pet pet --output_file_base /Users/gost/temp/terraclimate/spei/output/nc_original/spt_cli_spei --scales <span class="m">1</span> <span class="m">2</span> <span class="m">3</span> <span class="m">6</span> <span class="m">9</span> <span class="m">12</span> <span class="m">18</span> <span class="m">24</span> <span class="m">36</span> <span class="m">48</span> <span class="m">60</span> <span class="m">72</span> --calibration_start_year <span class="m">1958</span> --calibration_end_year <span class="m">2020</span> --multiprocessing all
+</code></pre></div>
+</li>
+<li>
+<p>Above code is example for calculating SPEI 1 to 72-months. It's ok if you think you only need some of them. Example: you are interested to calculate SPEI 1 - 3-months or SPEI 12-months, then adjust above code into <code>--scales 1 2 3</code> or <code>--scales 12</code>.</p>
+</li>
+<li>
+<p>The above command will compute SPEI (both gamma and Pearson Type III distributions) from monthly precipitation dataset and potential evapotranspiration, and the calibration period used will be Jan-1958 through Dec-2020. The index will be computed at <code>1</code>,<code>2</code>,<code>3</code>,<code>6</code>,<code>9</code>,<code>12</code>,<code>18</code>,<code>24</code>,<code>36</code>,<code>48</code>,<code>60</code> and <code>72-month</code> timescales. The output files will be &lt;<code>out_dir&gt;/stp_cli_spei_gamma_xx.nc</code>, and <code>&lt;out_dir&gt;/stp_cli_spei_pearson_xx.nc</code>.</p>
+<p>The output files will be:</p>
+<p>Gamma</p>
+<ol>
+<li>1-month: <code>/output/nc_original/stp_cli_spei_gamma_01.nc</code></br></li>
+<li>2-month: <code>/output/nc_original/stp_cli_spei_gamma_02.nc</code></br></li>
+<li>3-month: <code>/output/nc_original/stp_cli_spei_gamma_03.nc</code></br></li>
+<li>6-month: <code>/output/nc_original/stp_cli_spei_gamma_06.nc</code></br></li>
+<li>9-month: <code>/output/nc_original/stp_cli_spei_gamma_09.nc</code></br></li>
+<li>12-month: <code>/output/nc_original/stp_cli_spei_gamma_12.nc</code></br></li>
+<li>18-month: <code>/output/nc_original/stp_cli_spei_gamma_18.nc</code></br></li>
+<li>24-month: <code>/output/nc_original/stp_cli_spei_gamma_24.nc</code></br></li>
+<li>36-month: <code>/output/nc_original/stp_cli_spei_gamma_36.nc</code></br></li>
+<li>48-month: <code>/output/nc_original/stp_cli_spei_gamma_48.nc</code></br></li>
+<li>60-month: <code>/output/nc_original/stp_cli_spei_gamma_60.nc</code></br></li>
+<li>72-month: <code>/output/nc_original/stp_cli_spei_gamma_72.nc</code></br></li>
+</ol>
+<p>Pearson</p>
+<ol>
+<li>1-month: <code>/output/nc_original/stp_cli_spei_pearson_01.nc</code></br></li>
+<li>2-month: <code>/output/nc_original/stp_cli_spei_pearson_02.nc</code></br></li>
+<li>3-month: <code>/output/nc_original/stp_cli_spei_pearson_03.nc</code></br></li>
+<li>6-month: <code>/output/nc_original/stp_cli_spei_pearson_06.nc</code></br></li>
+<li>9-month: <code>/output/nc_original/stp_cli_spei_pearson_09.nc</code></br></li>
+<li>12-month: <code>/output/nc_original/stp_cli_spei_pearson_12.nc</code></br></li>
+<li>18-month: <code>/output/nc_original/stp_cli_spei_pearson_18.nc</code></br></li>
+<li>24-month: <code>/output/nc_original/stp_cli_spei_pearson_24.nc</code></br></li>
+<li>36-month: <code>/output/nc_original/stp_cli_spei_pearson_36.nc</code></br></li>
+<li>48-month: <code>/output/nc_original/stp_cli_spei_pearson_48.nc</code></br></li>
+<li>60-month: <code>/output/nc_original/stp_cli_spei_pearson_60.nc</code></br></li>
+<li>72-month: <code>/output/nc_original/stp_cli_spei_pearson_72.nc</code></br></li>
+</ol>
+</li>
+</ul>
+<p>Parallelization will occur utilizing all CPUs.</p>
+<p>When the SPEI calculation completed, move arrange all the output by moving SPEI files with gamma to <code>gamma</code>folder and with pearson to <code>pearson</code> folder.</p>
+<p>For the translation to GeoTIFF as a final output, we only use SPEI gamma version.</p>
+<h2 id="3-visualize-the-result-using-panoply">3. Visualize the result using Panoply</h2>
+<p>Let see the result.</p>
+<ul>
+<li>
+<p>From the <code>/output/nc_original/gamma</code> directory, right-click file <code>stp_cli_spei_gamma_12.nc</code> and Open With Panoply.</p>
+<p>If you are not following the tutorial but interested to see the file, you can download this file from this link: <a href=""></a> </p>
+</li>
+<li>
+<p>From the Datasets tab select <code>spei_gamma_12_month</code> and click Create Plot</p>
+</li>
+<li>
+<p>In the Create Plot window select option Georeferenced Longitude-Latitude.</p>
+</li>
+<li>
+<p>When the Plot window opens:</p>
+<ul>
+<li>Array tab: Change the time into <code>717</code> to view data on <code>1 September 2019</code></li>
+<li>Scale tab: Change value on Min <code>-3.09</code>, Max <code>3.09</code>, Major <code>6</code>, Color Table <code>CB_RdBu_09.cpt</code></li>
+<li>Map tab: Change value on Center on Lon <code>7.0</code> Lat <code>1.0</code>, then Zoom in the map through menu-editor Plot &gt; Zoom - Plot In few times until Sao Tome and Principe appear proportionally. Set grid spacing <code>1.0</code> and Labels on every grid lines.</li>
+<li>Overlays tab: Change <code>Overlay 1</code> to <code>MWDB_Coasts_Countries_1.cnob</code></li>
+</ul>
+<p><img alt="SPEI-12" src="../img/stp-spei-12.png" /></p>
+</li>
+</ul>
+<h2 id="4-convert-the-result-to-geotiff">4. Convert the result to GeoTIFF</h2>
+<p>We need CDO to do a conversion of the result into GeoTIFF format, and CDO required the variable should be in <code>time</code>,<code>lat</code>,<code>lon</code>, while the output from SPEI: <code>stp_cli_spei_gamma_x_month.nc</code> in <code>lat</code>,<code>lon</code>,<code>time</code>, you can check this via <code>ncdump -h stp_cli_spei_gamma_12.nc</code></p>
+<ul>
+<li>
+<p>Navigate your Terminal to folder <code>/output/nc_original/gamma/</code></p>
+</li>
+<li>
+<p>Let's re-order the variables into <code>time</code>,<code>lat</code>,<code>lon</code> using <code>ncpdq</code> command from NCO and save the result to folder <code>/output/nc_tll/STP/</code></p>
+<div class="highlight"><pre><span></span><code>ncpdq -a time,lat,lon stp_cli_spei_gamma_12.nc ../../../output/nc_tll/STP/tp_cli_spei_gamma_12.nc
+</code></pre></div>
+</li>
+<li>
+<p>Navigate your Terminal to folder <code>/output/nc_tll/STP/</code></p>
+</li>
+<li>
+<p>Check result and metadata to make sure everything is correct.</p>
+<div class="highlight"><pre><span></span><code>ncdump -h stp_cli_spei_gamma_12.nc
+</code></pre></div>
+</li>
+<li>
+<p>Then convert all <code>stp_cli_spei_gamma_12.nc</code> value into GeoTIFF with <code>time</code> dimension information as the filename using CDO and GDAL. Usually the geotiff image will not have projection information, so we will add that information via the script: <code>-a_ullr ulx uly lrx lry -a_srs EPSG:4326</code></p>
+</li>
+<li>
+<p>Execute below script and save the result to folder <code>/output/geotiff/gamma/STP/SPEI-12</code></p>
+<div class="highlight"><pre><span></span><code><span class="k">for</span> t <span class="k">in</span> <span class="sb">`</span>cdo showdate stp_cli_spei_gamma_12.nc<span class="sb">`</span><span class="p">;</span> <span class="k">do</span>
+    cdo seldate,<span class="nv">$t</span> stp_cli_spei_gamma_12.nc dummy.nc     
+    gdal_translate -of GTiff -a_ullr <span class="m">5</span>.75 <span class="m">2</span>.15 <span class="m">8</span>.05 -0.35 -a_srs EPSG:4326 -co <span class="nv">COMPRESS</span><span class="o">=</span>LZW -co <span class="nv">PREDICTOR</span><span class="o">=</span><span class="m">1</span> dummy.nc ../../geotiff/gamma/STP/SPEI-12/stp_cli_terraclimate_spei12.<span class="nv">$t</span>.tif
+<span class="k">done</span>
+</code></pre></div>
+</li>
+<li>
+<p>Next, you can continue to translate other SPEI files.</p>
+</li>
+</ul>
+<p>Congrats, now you are able to calculate SPEI based on monthly rainfall in netCDF and translate the output into GeoTIFF format.</p>
+<h2 id="5-global-spei-data">5. Global SPEI data</h2>
+<p>Global SPEI-12 data using TerraClimate has been computed, other SPEI for different time period will follow. The monthly SPEI data is available in GeoTIFF format at DEC S3 bucket: <code>s3://wbgdecinternal-ntl/climate/products/spei-terraclimate/spei-12/geotiff</code></p>
+<h3 id="51-example-output">5.1. Example output</h3>
+<p>Below is the example of global SPEI-12 as of December 2020, generated by GOST team.</p>
+<p><img alt="GOST_SPEI12_Dec2020" src="../img/gost-global-spei12-20201201.png" /></p>
+<h3 id="52-comparison-with-other-data-provider">5.2. Comparison with other data provider</h3>
+<p><strong>SPEI Global Drought Monitor</strong></p>
+<p>Santiago Begueria and friend from Spanish National Research Council who invented SPEI, released the <a href="https://spei.csic.es/index.html">SPEI Global Drought Monitor</a> which offers near real-time information about drought conditions at the global scale, with a 1 degree spatial resolution and a monthly time resolution.</p>
+<p>Link for SPEI 12-month, December 2020 from Global Drought Monitor - <a href="https://spei.csic.es/map/maps.html#months=4#month=11#year=2020">https://spei.csic.es/map/maps.html#months=4#month=11#year=2020</a></p>
+<p><img alt="GDM_SPEI12_Dec2020" src="../img/gdm-global-spei12-20201201.png" /></p>
+<p><strong>Climate Engine</strong></p>
+<p><a href="http://climateengine.org"><strong>Climate Engine</strong></a> is a free web application powered by Google Earth Engine that can be used to create on-demand maps and charts from publicly available satellite and climate data using a standard web browser. Climate Engine allows users to analyze and interact with climate and earth observations for decision support related to drought, water use, agricultural, wildfire, and ecology.</p>
+<p>One of the product that could generate easily using Climate Engine is SPEI and using TerraClimate data. Link <a href="https://climengine.page.link/yMtH">https://climengine.page.link/yMtH</a></p>
+<p><img alt="ClimateEngine_SPEI12_Dec2020" src="../img/climengine-global-spei12-20201201.png" /></p>
+<h2 id="6-reference">6. Reference</h2>
+<ol>
+<li><a href="https://climatedataguide.ucar.edu/climate-data/standardized-precipitation-evapotranspiration-index-spei">https://climatedataguide.ucar.edu/climate-data/standardized-precipitation-evapotranspiration-index-spei</a></li>
+<li><a href="https://spei.csic.es">https://spei.csic.es</a></li>
+<li><a href="http://www.climatologylab.org/terraclimate.html">http://www.climatologylab.org/terraclimate.html</a></li>
+<li><a href="https://pypi.org/project/climate-indices/">https://pypi.org/project/climate-indices/</a></li>
+<li><a href="https://climate-indices.readthedocs.io/en/latest/">https://climate-indices.readthedocs.io/en/latest/</a></li>
+<li><a href="https://code.mpimet.mpg.de/projects/cdo">https://code.mpimet.mpg.de/projects/cdo</a></li>
+<li><a href="http://nco.sourceforge.net">http://nco.sourceforge.net</a></li>
+<li><a href="https://appliedsciences.nasa.gov/join-mission/training/english/arset-applications-gpm-imerg-reanalysis-assessing-extreme-dry-and-wet">https://appliedsciences.nasa.gov/join-mission/training/english/arset-applications-gpm-imerg-reanalysis-assessing-extreme-dry-and-wet</a></li>
+</ol>
+
+              
+            </article>
+          </div>
+        </div>
+        
+          <a href="#" class="md-top md-icon" data-md-component="top" data-md-state="hidden">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12z"/></svg>
+            Back to top
+          </a>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+    <nav class="md-footer__inner md-grid" aria-label="Footer">
+      
+        
+        <a href="../python-env/" class="md-footer__link md-footer__link--prev" aria-label="Previous: Python Environment" rel="prev">
+          <div class="md-footer__button md-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+          </div>
+          <div class="md-footer__title">
+            <div class="md-ellipsis">
+              <span class="md-footer__direction">
+                Previous
+              </span>
+              Python Environment
+            </div>
+          </div>
+        </a>
+      
+      
+        
+        <a href="../sdflagship/" class="md-footer__link md-footer__link--next" aria-label="Next: Climate Change, Urban and Sustainability" rel="next">
+          <div class="md-footer__title">
+            <div class="md-ellipsis">
+              <span class="md-footer__direction">
+                Next
+              </span>
+              Climate Change, Urban and Sustainability
+            </div>
+          </div>
+          <div class="md-footer__button md-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11H4z"/></svg>
+          </div>
+        </a>
+      
+    </nav>
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    <script id="__config" type="application/json">{"base": "..", "features": ["navigation.sections", "navigation.expand", "navigation.top"], "translations": {"clipboard.copy": "Copy to clipboard", "clipboard.copied": "Copied to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.placeholder": "Type to start searching", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.term.missing": "Missing", "select.version.title": "Select version"}, "search": "../assets/javascripts/workers/search.22074ed6.min.js"}</script>
+    
+    
+      <script src="../assets/javascripts/bundle.01de222e.min.js"></script>
+      
+        <script src="../javascripts/mathjax.js"></script>
+      
+        <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+      
+        <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+      
+    
+  </body>
+</html>
